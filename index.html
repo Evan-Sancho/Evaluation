@@ -2088,6 +2088,68 @@
     white-space: nowrap;
   }
 
+  /* =====================================================
+   * Feature 加購方案鎖定樣式
+   * ===================================================== */
+  .feature-locked {
+    opacity: 0.45;
+    filter: grayscale(50%);
+    pointer-events: none;
+  }
+  .feature-lock-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    background: linear-gradient(135deg, #FEF3C7, #FFFBEB);
+    color: #92400E;
+    border: 1px dashed #D97706;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: 6px;
+    white-space: nowrap;
+  }
+  .feature-lock-row {
+    background: linear-gradient(135deg, #FFFBEB 0%, #FAFAFA 100%);
+    border: 1px solid #FBBF24;
+    border-left: 4px solid #D97706;
+    border-radius: var(--r-md);
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+  .feature-lock-row .head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  .feature-lock-row .head .title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .feature-lock-row .desc {
+    font-size: 12px;
+    color: var(--text-sub);
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+  .feature-lock-row .price-tag {
+    display: inline-block;
+    background: white;
+    border: 1px solid var(--border);
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--text);
+    margin-right: 8px;
+  }
+  .feature-lock-row .price-tag strong { color: var(--primary-dark); font-size: 13px; }
+
   /* 列印樣式 ：只列印 .pdf-modal 的內容，且去除浮水印與 modal chrome */
   @media print {
     body * { visibility: hidden; }
@@ -2300,7 +2362,6 @@
               <button class="active" onclick="setView('table')">☰ 列表</button>
               <button onclick="setView('board')">▦ 看板</button>
             </div>
-            <button class="btn btn-secondary" onclick="alert('匯出進度 Excel')">⇣ 匯出進度</button>
             <button class="btn btn-secondary" onclick="alert('一鍵下載所有已完成項次 PDF')">📦 批次下載</button>
             <button class="btn btn-primary supervisor-only" onclick="alert('產生完整評鑑成果書 (含所有項次與附件)')">📄 產生評鑑書</button>
           </div>
@@ -4065,7 +4126,7 @@
         </div>
 
         <div class="design-note">
-          <span class="tag">I</span>通知中心設計重點：<strong>未讀通知有左側 teal 邊條與右上紅點</strong>；通知依時間分組（今天 / 昨天 / 本週稍早 / 更早）；點擊通知<strong>直接導向相關項次頁面</strong>；類型以圖示區分（審核 / 退回 / 完成 / 系統）；推播管道未來可整合 Line Notify、Email、Web Push
+          <span class="tag">I</span>通知中心設計重點：<strong>未讀通知有左側 teal 邊條與右上紅點</strong>；通知依時間分組（今天 / 昨天 / 本週稍早 / 更早）；點擊通知<strong>直接導向相關項次頁面</strong>；類型以圖示區分（審核 / 退回 / 完成 / 系統）；推播管道：<strong>系統內 + Email 為標配</strong>，<strong>Line Notify 為加購方案</strong>（每機構獨立開通）
         </div>
       </div>
     </div>
@@ -4140,9 +4201,6 @@
 
             <div class="sub-nav-section">系統</div>
             <a><span class="icon">📧</span>通知設定</a>
-            <a><span class="icon">📦</span>儲存空間</a>
-            <a><span class="icon">📋</span>稽核日誌</a>
-            <a><span class="icon">🔌</span>API / 整合</a>
 
             <div class="sub-nav-section">帳務</div>
             <a><span class="icon">💳</span>訂閱方案</a>
@@ -4436,18 +4494,67 @@
                   <label>截止前 X 天提醒</label>
                   <div class="field"><select class="form-select" style="max-width:120px;"><option>7 天</option><option>3 天</option><option>1 天</option></select></div>
                 </div>
-                <div class="form-row">
-                  <label>Line Notify 整合</label>
-                  <div class="field">
-                    <button class="btn btn-secondary btn-sm">🔗 連結 Line</button>
-                    <small style="display:inline; margin-left:10px;">未啟用</small>
+              </div>
+            </div>
+
+            <!-- 加購方案專區 -->
+            <div class="panel">
+              <div class="panel-head">
+                <div class="title">⭐ 加購方案 <small>本機構可選購之進階功能</small></div>
+                <span class="lock-tag">📞 諮詢業務</span>
+              </div>
+              <div class="panel-body">
+
+                <!-- Line Notify 加購 -->
+                <div class="feature-lock-row">
+                  <div class="head">
+                    <div class="title">💬 Line Notify 即時推播 <span class="feature-lock-badge">🔒 加購方案 · 未開通</span></div>
+                  </div>
+                  <div class="desc">
+                    將項次審核通過、退回意見、截止日提醒等通知即時推送至主管 Line。比 Email 即時，顯著提升評鑑作業期間溝通效率。<strong>建議於評鑑啟動時開通，使用至評鑑完成。</strong>
+                  </div>
+                  <div style="margin-top:10px;">
+                    <span class="price-tag"><strong>NT$ 3,000</strong> / 評鑑週期</span>
+                    <span class="price-tag">一次性買斷</span>
+                    <span class="price-tag">不限使用者數</span>
+                    <span class="price-tag">含技術支援</span>
+                  </div>
+                  <p style="margin-top:8px; font-size:11px; color:var(--text-sub);">
+                    💡 涵蓋整個評鑑週期（從建立評鑑日到評鑑結束歸檔），下次評鑑啟動時若需 Line 推播可再次加購。
+                  </p>
+                  <div style="margin-top:12px; display:flex; gap:8px; align-items:center;">
+                    <button class="btn btn-primary btn-sm" onclick="alert('將通知 Sancho 業務聯繫貴機構，預計 1 個工作日內回覆。\n\n聯絡資訊：\n· 電話：02-xxxx-xxxx\n· Email：sales@sanchoenergy.com\n· Line: @sancho-care')">📞 聯絡業務開通</button>
+                    <small style="color:var(--text-sub);">或致電 02-xxxx-xxxx</small>
                   </div>
                 </div>
+
+                <!-- 未來其他加購方案預留 -->
+                <div class="feature-lock-row" style="opacity:0.6;">
+                  <div class="head">
+                    <div class="title">📊 進階分析報表 <span class="feature-lock-badge">🔒 規劃中</span></div>
+                  </div>
+                  <div class="desc">
+                    跨年度趨勢分析、護理師效能比較、評鑑成績預測 AI 模型（規劃中，預計 2027 上線）
+                  </div>
+                </div>
+
+                <div class="feature-lock-row" style="opacity:0.6;">
+                  <div class="head">
+                    <div class="title">🔄 院內系統自動匯入 <span class="feature-lock-badge">🔒 規劃中</span></div>
+                  </div>
+                  <div class="desc">
+                    自動從機構內部 HR / 排班系統匯入員工資料、人力配置佐證（需個案評估，預計 2027 上線）
+                  </div>
+                </div>
+
+                <p style="margin-top:14px; font-size:11px; color:var(--text-sub); padding:8px 12px; background:var(--bg); border-radius:var(--r-md);">
+                  💡 已開通的加購功能會自動顯示於對應頁面（如 Line Notify 開通後，使用者可於「個人設定 → 通知偏好」開啟 Line 通道）。
+                </p>
               </div>
             </div>
 
             <div class="design-note">
-              <span class="tag">J</span>系統設定設計重點：<strong>左側雙層分類導覽</strong>方便快速跳轉；<strong>評鑑期間可滾動週期管理</strong>，跨年度評鑑資料皆保留；<strong>帳號管理保留擴充性</strong>，現階段每角色單一帳號但未來可彈性新增；<strong>PDF 範本可預覽</strong>，附件整合方式可選擇單檔或 ZIP
+              <span class="tag">J</span>系統設定設計重點：<strong>左側雙層分類導覽</strong>方便快速跳轉；<strong>評鑑期間可滾動週期管理</strong>，跨年度評鑑資料皆保留；<strong>加購方案系統</strong>讓 Sancho 可依機構需求分級銷售（Line Notify 為首發加購），後端透過 institutions.features JSONB 控管權限
             </div>
           </div>
         </div>
@@ -4516,7 +4623,6 @@
             <div class="sub-nav-section">安全</div>
             <a><span class="icon">🛡️</span>兩階段驗證</a>
             <a><span class="icon">💻</span>登入裝置</a>
-            <a><span class="icon">📋</span>我的操作紀錄</a>
           </aside>
 
           <div>
@@ -4598,12 +4704,18 @@
             <div class="panel">
               <div class="panel-head"><div class="title">🔔 通知偏好</div></div>
               <div class="panel-body settings-form">
+
+                <p class="supervisor-only" style="font-size:12px; color:var(--text-sub); padding:10px 14px; background:#FFFBEB; border:1px solid #FBBF24; border-radius:var(--r-md); margin-bottom:14px;">
+                  💡 <strong>Line 推播為加購方案</strong>，目前本機構尚未開通。如需啟用 Line 即時通知，請於「<a href="#" onclick="alert('請於 sidebar 點擊「⚙️ 系統設定 → 加購方案」查看詳情');" style="color:var(--primary-dark); font-weight:600;">系統設定 → 加購方案</a>」中聯絡業務開通。
+                </p>
+
                 <div class="form-row">
                   <label>項次審核通過</label>
                   <div class="field" style="display:flex; gap:20px; align-items:center;">
                     <label style="display:flex; gap:6px; align-items:center;"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label> 系統內</label>
                     <label style="display:flex; gap:6px; align-items:center;"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label> Email</label>
-                    <label style="display:flex; gap:6px; align-items:center;"><label class="switch"><input type="checkbox"><span class="slider"></span></label> Line</label>
+                    <label class="feature-locked supervisor-only" style="display:flex; gap:6px; align-items:center;" title="Line Notify 為加購方案"><label class="switch"><input type="checkbox" disabled><span class="slider"></span></label> Line</label>
+                    <span class="feature-lock-badge supervisor-only">🔒 加購方案</span>
                   </div>
                 </div>
                 <div class="form-row">
@@ -4611,7 +4723,8 @@
                   <div class="field" style="display:flex; gap:20px; align-items:center;">
                     <label style="display:flex; gap:6px; align-items:center;"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label> 系統內</label>
                     <label style="display:flex; gap:6px; align-items:center;"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label> Email</label>
-                    <label style="display:flex; gap:6px; align-items:center;"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label> Line</label>
+                    <label class="feature-locked supervisor-only" style="display:flex; gap:6px; align-items:center;" title="Line Notify 為加購方案"><label class="switch"><input type="checkbox" disabled><span class="slider"></span></label> Line</label>
+                    <span class="feature-lock-badge supervisor-only">🔒 加購方案</span>
                   </div>
                 </div>
                 <div class="form-row">
@@ -4619,7 +4732,8 @@
                   <div class="field" style="display:flex; gap:20px; align-items:center;">
                     <label style="display:flex; gap:6px; align-items:center;"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label> 系統內</label>
                     <label style="display:flex; gap:6px; align-items:center;"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label> Email</label>
-                    <label style="display:flex; gap:6px; align-items:center;"><label class="switch"><input type="checkbox"><span class="slider"></span></label> Line</label>
+                    <label class="feature-locked supervisor-only" style="display:flex; gap:6px; align-items:center;" title="Line Notify 為加購方案"><label class="switch"><input type="checkbox" disabled><span class="slider"></span></label> Line</label>
+                    <span class="feature-lock-badge supervisor-only">🔒 加購方案</span>
                   </div>
                 </div>
                 <div class="form-row">
@@ -4664,36 +4778,8 @@
               </div>
             </div>
 
-            <!-- 我的操作紀錄 -->
-            <div class="panel">
-              <div class="panel-head">
-                <div class="title">📋 我的操作紀錄 <small>近 30 天</small></div>
-                <button class="btn btn-secondary btn-sm">⇣ 匯出</button>
-              </div>
-              <div class="panel-body" style="padding:0;">
-                <table class="item-table">
-                  <thead>
-                    <tr>
-                      <th style="width:140px;">時間</th>
-                      <th>操作</th>
-                      <th style="width:120px;">項次</th>
-                      <th style="width:80px;">結果</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><td style="font-size:12px; color:var(--text-sub);">今日 14:25</td><td>送出項次審核</td><td><span class="code">C8</span></td><td><span class="badge review"><span class="dot"></span>待審核</span></td></tr>
-                    <tr><td style="font-size:12px; color:var(--text-sub);">今日 11:30</td><td>上傳附件「附件3_污物處理空間照片.jpg」</td><td><span class="code">C8</span></td><td><span class="badge done"><span class="dot"></span>成功</span></td></tr>
-                    <tr><td style="font-size:12px; color:var(--text-sub);">今日 10:15</td><td>編輯執行現況文字</td><td><span class="code">C8</span></td><td><span class="badge done"><span class="dot"></span>已儲存</span></td></tr>
-                    <tr><td style="font-size:12px; color:var(--text-sub);">昨日 16:15</td><td>送出項次審核</td><td><span class="code">B7</span></td><td><span class="badge review"><span class="dot"></span>待審核</span></td></tr>
-                    <tr><td style="font-size:12px; color:var(--text-sub);">昨日 09:42</td><td>登入系統</td><td>—</td><td><span class="badge done"><span class="dot"></span>成功</span></td></tr>
-                    <tr><td style="font-size:12px; color:var(--text-sub);">5/11 14:50</td><td>修改項次內容（B2 退回後修改）</td><td><span class="code">B2</span></td><td><span class="badge done"><span class="dot"></span>已儲存</span></td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
             <div class="design-note">
-              <span class="tag">K</span>個人設定設計重點：<strong>分區管理</strong>個人資料、密碼、通知、安全；<strong>通知偏好支援三通道</strong>（系統內 / Email / Line）獨立開關；<strong>個人操作紀錄</strong>方便使用者自我追蹤；<strong>登入裝置管理</strong>提供遠端登出功能保障安全
+              <span class="tag">K</span>個人設定設計重點：<strong>分區管理</strong>個人資料、密碼、通知、安全；<strong>通知偏好支援三通道</strong>（系統內 + Email 為標配，<strong>Line Notify 為加購方案</strong>，未開通時鎖定顯示）；<strong>兩階段驗證</strong>與<strong>登入裝置管理</strong>提供遠端登出功能保障安全
             </div>
           </div>
         </div>
@@ -4915,9 +5001,10 @@
     }
     // 關閉下拉
     document.querySelectorAll('.year-switcher.open').forEach(el => el.classList.remove('open'));
-    // 提示
-    if (key === 'home') {
-      setTimeout(() => alert(`已切換至「${inst.name}」（${inst.type} · ${inst.county}）\n\n· 評鑑基準採用新北市版本\n· 項次編輯頁採用「基準說明多項次」架構\n· 自評等級為 A/B/C/D（含分數計算）\n\n請至「評鑑項次編輯」頁查看居家式範本（A1 業務計畫擬訂與執行）`), 100);
+    // 切換機構後統一導向「評鑑看板」做 context reset
+    // 符合 SaaS 標準互動模式：切換 tenant 後回到該 tenant 的首頁
+    if (typeof go === 'function') {
+      go('dashboard');
     }
   }
   // 兼容舊呼叫 (歷年歸檔模式已移除)
@@ -4934,12 +5021,26 @@
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
-  // 角色切換（影響 sidebar / KPI / topbar 等顯示）
+  // 角色切換（三層權限：護理師 / 主管 / 機構管理員）
+  // 規則：
+  //   nurse-only      = 只給護理師看
+  //   supervisor-only = 給主管 + 機構管理員看（審核權限以上）
+  //   admin-only      = 只給機構管理員看（最高權限）
+  //   not-admin       = 給護理師 + 主管看，但對機構管理員隱藏（用於 user-chip 等個人身分元素）
   function setRole(role) {
     document.body.dataset.role = role;
-    const isNurse = role === 'nurse';
+    const isNurse      = role === 'nurse';
+    const isSupervisor = role === 'supervisor';
+    const isAdmin      = role === 'admin';
+    const hasReviewPerm = isSupervisor || isAdmin;   // 有審核權限的角色
+
     document.querySelectorAll('.nurse-only').forEach(el => el.style.display = isNurse ? '' : 'none');
-    document.querySelectorAll('.supervisor-only').forEach(el => el.style.display = isNurse ? 'none' : '');
+    document.querySelectorAll('.supervisor-only').forEach(el => el.style.display = hasReviewPerm ? '' : 'none');
+    document.querySelectorAll('.admin-only').forEach(el => el.style.display = isAdmin ? '' : 'none');
+    document.querySelectorAll('.not-admin').forEach(el => {
+      if (isAdmin) el.style.display = 'none';
+    });
+
     document.querySelectorAll('.review-bar .role-toggle button').forEach(b => b.classList.toggle('active', b.dataset.role === role));
   }
 
