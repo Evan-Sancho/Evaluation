@@ -1918,6 +1918,124 @@
    * ===================================================== */
   .pdf-home { max-width: 880px !important; }
   .pdf-home .pdf-header h1 { font-size: 20px; }
+
+  /* PDF Header（左 Logo + 右機構名稱）*/
+  .pdf-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    text-align: left;
+  }
+  .pdf-header-row .pdf-logo {
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 26px;
+    letter-spacing: -1px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+  }
+  .pdf-header-row .pdf-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  .pdf-header-row .pdf-title { text-align: center; }
+  .pdf-header-row .pdf-title h1 { margin: 0 0 4px; }
+  .pdf-header-row .pdf-title p { margin: 0; }
+
+  /* 項次說明大表內嵌附件小表（縮圖網格 · 每列最多 2 個附件）*/
+  .pdf-attach-inline {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    table-layout: fixed;
+  }
+  .pdf-attach-inline th,
+  .pdf-attach-inline td {
+    border: 1px solid #1F2937;
+    vertical-align: middle;
+    line-height: 1.55;
+  }
+  /* 欄位標題 = 護理師上傳時填寫的「內容說明」*/
+  .pdf-attach-inline th {
+    background: #E0F2FE;
+    color: #075985;
+    font-weight: 700;
+    font-size: 11px;
+    text-align: center;
+    padding: 6px 10px;
+    width: 50%;
+  }
+  /* 縮圖儲存格 */
+  .pdf-attach-inline td {
+    background: #FAFAFA;
+    padding: 10px;
+    text-align: center;
+    height: 140px;
+    width: 50%;
+  }
+  .pdf-attach-inline td.empty {
+    background: #FFFFFF;
+    border: 1px dashed #CBD5E1;
+  }
+  /* 縮圖容器 */
+  .pdf-attach-inline .att-thumb {
+    display: inline-block;
+    width: 100%;
+    max-width: 240px;
+    height: 110px;
+    border: 1px solid #CBD5E1;
+    border-radius: 4px;
+    background: #E2E8F0;
+    color: #64748B;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 110px;
+    text-align: center;
+    vertical-align: middle;
+    overflow: hidden;
+    position: relative;
+  }
+  .pdf-attach-inline .att-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .pdf-attach-inline .att-thumb.pdf {
+    background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%);
+    color: #B91C1C;
+  }
+  .pdf-attach-inline .att-thumb.xls {
+    background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
+    color: #047857;
+  }
+  .pdf-attach-inline .att-thumb.img {
+    background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+    color: #1E40AF;
+  }
+  .pdf-attach-inline .att-thumb.doc {
+    background: linear-gradient(135deg, #E0E7FF 0%, #C7D2FE 100%);
+    color: #3730A3;
+  }
+  .pdf-attach-inline-title {
+    background: #F0FDFA;
+    border: 1px solid #1F2937;
+    border-bottom: none;
+    padding: 5px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-top: 8px;
+  }
   .pdf-home h3 {
     font-size: 14px;
     color: var(--text);
@@ -2150,6 +2268,95 @@
   }
   .feature-lock-row .price-tag strong { color: var(--primary-dark); font-size: 13px; }
 
+  /* =====================================================
+   * 錯誤 / 成功訊息 banner
+   * ===================================================== */
+  .form-alert {
+    padding: 10px 14px;
+    border-radius: var(--r-md);
+    font-size: 13px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.55;
+  }
+  .form-alert .icon { font-size: 16px; flex-shrink: 0; }
+  .form-alert.error  { background: #FEE2E2; border: 1px solid #FCA5A5; color: #991B1B; }
+  .form-alert.warn   { background: #FEF3C7; border: 1px solid #FCD34D; color: #92400E; }
+  .form-alert.success{ background: #DCFCE7; border: 1px solid #86EFAC; color: #166534; }
+  .form-alert.info   { background: #DBEAFE; border: 1px solid #93C5FD; color: #1E40AF; }
+  .form-alert strong { font-weight: 600; }
+
+  /* =====================================================
+   * 密碼強度指示器
+   * ===================================================== */
+  .pw-strength {
+    margin-top: 8px;
+  }
+  .pw-strength-bar {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 6px;
+  }
+  .pw-strength-bar .seg {
+    height: 4px;
+    flex: 1;
+    background: var(--border-light);
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+  .pw-strength-bar.weak .seg:nth-child(1) { background: #EF4444; }
+  .pw-strength-bar.medium .seg:nth-child(-n+2) { background: #F59E0B; }
+  .pw-strength-bar.strong .seg { background: #16A34A; }
+
+  .pw-strength-label {
+    font-size: 11px;
+    color: var(--text-sub);
+    display: flex;
+    justify-content: space-between;
+  }
+  .pw-strength-label .level { font-weight: 600; }
+  .pw-strength-label .level.weak { color: #DC2626; }
+  .pw-strength-label .level.medium { color: #D97706; }
+  .pw-strength-label .level.strong { color: #16A34A; }
+
+  .pw-checklist {
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: var(--bg);
+    border-radius: var(--r-md);
+    font-size: 12px;
+  }
+  .pw-checklist .item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 0;
+    color: var(--text-sub);
+  }
+  .pw-checklist .item.ok { color: var(--status-done); }
+  .pw-checklist .item .check { width: 14px; display: inline-flex; justify-content: center; }
+  .pw-checklist .item.ok .check::before { content: '✓'; color: var(--status-done); font-weight: 700; }
+  .pw-checklist .item:not(.ok) .check::before { content: '○'; color: var(--text-mute); }
+
+  /* 密碼欄位的 show/hide eye icon */
+  .pw-input-wrap { position: relative; }
+  .pw-input-wrap .form-input { padding-right: 40px; }
+  .pw-input-wrap .pw-toggle {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px 6px;
+    font-size: 14px;
+    color: var(--text-sub);
+  }
+  .pw-input-wrap .pw-toggle:hover { color: var(--text); }
+
   /* 列印樣式 ：只列印 .pdf-modal 的內容，且去除浮水印與 modal chrome */
   @media print {
     body * { visibility: hidden; }
@@ -2214,8 +2421,9 @@
   </div>
 
   <div class="role-toggle">
-    <button class="active" data-role="nurse">👩‍⚕️ 護理師視角</button>
-    <button data-role="supervisor">👔 主管視角</button>
+    <button class="active" data-role="nurse">👩‍⚕️ 護理師</button>
+    <button data-role="supervisor">👔 主管</button>
+    <button data-role="admin">🏢 機構管理員</button>
   </div>
 
   <span class="version">v6 · 2026-05-14</span>
@@ -2247,6 +2455,15 @@
         <h2>歡迎回來</h2>
         <p class="greet">請使用您所屬機構發給的帳號登入</p>
 
+        <!-- 範例錯誤訊息（實際登入時動態顯示）-->
+        <div class="form-alert form-alert-error" style="display:none;" id="login-error">
+          <span class="ico">⚠️</span>
+          <div>
+            <strong>登入失敗</strong>
+            <div class="msg">帳號或密碼錯誤，請重新輸入。連續錯誤 5 次將鎖定帳號 15 分鐘。</div>
+          </div>
+        </div>
+
         <div class="role-switch">
           <button class="active">👩‍⚕️ 護理師</button>
           <button>👔 主管</button>
@@ -2258,19 +2475,199 @@
         </div>
         <div class="form-group">
           <label>密碼</label>
-          <input type="password" class="form-input" value="••••••••">
+          <div class="pw-input-wrap">
+            <input type="password" class="form-input" id="login-pw" value="••••••••">
+            <button type="button" class="pw-toggle" onclick="togglePw('login-pw', this)">👁</button>
+          </div>
         </div>
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; font-size:12px;">
           <label style="display:flex; align-items:center; gap:6px; color:var(--text-sub); cursor:pointer;">
             <input type="checkbox" checked> 記住此裝置 30 天
           </label>
-          <a href="#" style="color: var(--primary-dark); text-decoration:none;">忘記密碼？</a>
+          <a href="#" onclick="go('forgot'); return false;" style="color: var(--primary-dark); text-decoration:none;">忘記密碼？</a>
         </div>
 
         <button class="btn btn-primary btn-block btn-lg" onclick="go('dashboard')">登入系統</button>
 
         <p style="text-align:center; margin-top:20px; font-size:11px; color:var(--text-mute);">
-          需要新帳號？請聯絡 IT 管理員 ext.2105
+          需要新帳號？請聯絡您的機構管理員<br>
+          （首次登入請先檢查信箱中的邀請信）
+        </p>
+
+        <!-- DEMO：點此可預覽各種錯誤狀態 -->
+        <p style="text-align:center; margin-top:14px; font-size:10px; color:var(--text-mute);">
+          🧪 <a href="#" onclick="document.getElementById('login-error').style.display='flex';return false;" style="color:var(--text-mute);">[Demo] 顯示登入錯誤訊息</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- ①.A 忘記密碼 - 步驟 A：輸入 Email                              -->
+<!-- ============================================================ -->
+<div id="page-forgot" class="page">
+  <div class="login-shell">
+    <div class="login-left">
+      <div class="brand-mark">
+        <div class="m">S</div>
+        <span>Sancho Care Suite</span>
+      </div>
+      <div>
+        <h1>找回您的<br><span class="accent">帳號存取權</span></h1>
+        <p class="sub">
+          忘記密碼別擔心，輸入您的 Email，<br>
+          我們將寄送密碼重設連結到您的信箱。<br><br>
+          若您是新員工且尚未接受邀請信，請聯絡機構管理員重寄。
+        </p>
+      </div>
+      <p class="footer">© 2026 Sancho Energy</p>
+    </div>
+
+    <div class="login-right">
+      <div class="login-card">
+        <h2>忘記密碼</h2>
+        <p class="greet">輸入您的 Email，我們將寄送密碼重設連結</p>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" class="form-input" placeholder="您的登入 Email" value="nurse@hsl.demo">
+        </div>
+
+        <p style="font-size:12px; color:var(--text-sub); margin:8px 0 16px; padding:8px 12px; background:var(--bg); border-radius:var(--r-md);">
+          🔒 <strong>安全提示</strong>：為防範帳號列舉攻擊，無論 Email 是否存在系統皆會顯示「已寄送」訊息。
+        </p>
+
+        <button class="btn btn-primary btn-block btn-lg" onclick="go('forgot-sent')">寄送重設信</button>
+
+        <p style="text-align:center; margin-top:18px; font-size:12px;">
+          想起來了？<a href="#" onclick="go('login'); return false;" style="color:var(--primary-dark); font-weight:600;">返回登入</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- ①.B 忘記密碼 - 步驟 B：寄送成功                                -->
+<!-- ============================================================ -->
+<div id="page-forgot-sent" class="page">
+  <div class="login-shell">
+    <div class="login-left">
+      <div class="brand-mark">
+        <div class="m">S</div>
+        <span>Sancho Care Suite</span>
+      </div>
+      <div>
+        <h1>請查收<br><span class="accent">您的 Email</span></h1>
+        <p class="sub">
+          我們已將密碼重設連結寄送至您填寫的 Email。<br>
+          請於 30 分鐘內點連結完成重設。
+        </p>
+      </div>
+      <p class="footer">© 2026 Sancho Energy</p>
+    </div>
+
+    <div class="login-right">
+      <div class="login-card" style="text-align:center;">
+        <div style="font-size:48px; margin-bottom:12px;">📧</div>
+        <h2 style="text-align:center;">已寄送密碼重設信</h2>
+        <p class="greet" style="text-align:center; margin-bottom:24px;">
+          如果此 Email 存在於系統中，<br>
+          您將在 1 分鐘內收到密碼重設連結。
+        </p>
+
+        <div class="form-alert info" style="text-align:left;">
+          <span class="icon">📥</span>
+          <div>
+            <strong>請檢查您的信箱：</strong><br>
+            · 收件夾 (Inbox)<br>
+            · 垃圾信件夾 (Spam / Junk)<br>
+            · 廣告信件夾<br>
+            · 連結有效期 <strong>30 分鐘</strong>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-block btn-lg" style="margin-top:18px;" onclick="go('reset-password')">
+          模擬點擊 Email 中的連結 →
+        </button>
+
+        <p style="text-align:center; margin-top:18px; font-size:12px; color:var(--text-sub);">
+          沒收到信？請等待 5 分鐘後 <a href="#" onclick="go('forgot'); return false;" style="color:var(--primary-dark); font-weight:600;">重新申請</a><br>
+          或聯絡機構管理員協助
+        </p>
+        <p style="text-align:center; margin-top:12px; font-size:12px;">
+          <a href="#" onclick="go('login'); return false;" style="color:var(--primary-dark); font-weight:600;">返回登入</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- ①.C 忘記密碼 - 步驟 C：設定新密碼                              -->
+<!--   （此頁面同時也是「接受邀請首次設密碼」的 UI）                 -->
+<!-- ============================================================ -->
+<div id="page-reset-password" class="page">
+  <div class="login-shell">
+    <div class="login-left">
+      <div class="brand-mark">
+        <div class="m">S</div>
+        <span>Sancho Care Suite</span>
+      </div>
+      <div>
+        <h1>設定<br><span class="accent">新密碼</span></h1>
+        <p class="sub">
+          請設定您的新密碼。設定完成後將自動登入。<br><br>
+          🔒 為了帳號安全，請設定強密碼，並避免使用<br>生日、姓名等容易猜測的組合。
+        </p>
+      </div>
+      <p class="footer">© 2026 Sancho Energy</p>
+    </div>
+
+    <div class="login-right">
+      <div class="login-card">
+        <h2>設定新密碼</h2>
+        <p class="greet">為 <strong style="color:var(--text);">nurse@hsl.demo</strong> 設定新密碼</p>
+
+        <div class="form-group">
+          <label>新密碼</label>
+          <div class="pw-input-wrap">
+            <input type="password" class="form-input" id="new-pw" placeholder="至少 8 字元，含英文+數字" oninput="checkPwStrength(this.value)">
+            <button class="pw-toggle" type="button" onclick="togglePw('new-pw', this)">👁</button>
+          </div>
+          <div class="pw-strength">
+            <div class="pw-strength-bar" id="pw-bar">
+              <div class="seg"></div>
+              <div class="seg"></div>
+              <div class="seg"></div>
+            </div>
+            <div class="pw-strength-label">
+              <span>密碼強度</span>
+              <span class="level" id="pw-level">尚未輸入</span>
+            </div>
+          </div>
+          <div class="pw-checklist" id="pw-checklist">
+            <div class="item" id="chk-len"><span class="check"></span>至少 8 個字元</div>
+            <div class="item" id="chk-alpha"><span class="check"></span>含英文字母</div>
+            <div class="item" id="chk-digit"><span class="check"></span>含數字</div>
+            <div class="item" id="chk-not-common"><span class="check"></span>非常見弱密碼（如 12345678、password）</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>確認新密碼</label>
+          <div class="pw-input-wrap">
+            <input type="password" class="form-input" id="confirm-pw" placeholder="再次輸入新密碼">
+            <button class="pw-toggle" type="button" onclick="togglePw('confirm-pw', this)">👁</button>
+          </div>
+          <small id="confirm-msg" style="display:none; color:var(--danger); font-size:11px; margin-top:4px;">兩次輸入的密碼不一致</small>
+        </div>
+
+        <button class="btn btn-primary btn-block btn-lg" style="margin-top:8px;" onclick="alert('密碼已設定成功！\n\n· 所有其他裝置已被登出\n· 即將以新密碼自動登入'); go('dashboard');">設定密碼並登入</button>
+
+        <p style="text-align:center; margin-top:18px; font-size:11px; color:var(--text-mute);">
+          連結將於 <strong>30 分鐘</strong>後失效。如已失效請<a href="#" onclick="go('forgot'); return false;" style="color:var(--primary-dark);">重新申請</a>。
         </p>
       </div>
     </div>
@@ -2302,8 +2699,8 @@
             <div><strong>財團法人台北市私立愛愛院</strong><span class="badge-y" style="background:#0EA5E9; color:#fff;">示範</span></div>
             <div class="meta-y">住宿式 · 台北市 · 115 年度</div>
           </a>
-          <div class="y-sep supervisor-only"></div>
-          <a class="y-item add supervisor-only" onclick="event.stopPropagation(); if(confirm('建立 116 年度評鑑？\n\n· 將 115 年度自動歸檔（保留所有資料）\n· 依新版基準建立 116 年度評鑑項次\n· 所有護理師需重新填寫\n\n確定繼續？')) alert('已建立 116 年度評鑑（系統設定 → 評鑑期間可修改細節）');">+ 建立 116 年度評鑑</a>
+          <div class="y-sep admin-only"></div>
+          <a class="y-item add admin-only" onclick="event.stopPropagation(); if(confirm('建立 116 年度評鑑？\n\n· 將 115 年度自動歸檔（保留所有資料）\n· 依新版基準建立 116 年度評鑑項次\n· 所有護理師需重新填寫\n\n確定繼續？')) alert('已建立 116 年度評鑑（系統設定 → 評鑑期間可修改細節）');">+ 建立 116 年度評鑑</a>
         </div>
       </div>
 
@@ -2312,7 +2709,7 @@
       <a class="nav-item" onclick="go('progress')"><span class="icon">📈</span>進度報表</a>
       <div class="nav-section">系統</div>
       <a class="nav-item" onclick="go('notifications')"><span class="icon">🔔</span>通知中心<span class="badge-inline">3</span></a>
-      <a class="nav-item supervisor-only" onclick="go('settings')"><span class="icon">⚙️</span>系統設定</a>
+      <a class="nav-item admin-only" onclick="go('settings')"><span class="icon">⚙️</span>系統設定</a>
       <a class="nav-item" onclick="go('profile')"><span class="icon">👤</span>個人設定</a>
 
       <div class="sidebar-bottom">
@@ -2336,12 +2733,15 @@
           <div class="icon-btn" onclick="go('notifications')">🔔<span class="dot"></span></div>
           <div class="user-chip">
             <div class="avatar nurse-only">陳</div>
-            <div class="avatar supervisor-only" style="background:#5E35B1; display:none;">王</div>
+            <div class="avatar supervisor-only not-admin" style="background:#5E35B1; display:none;">王</div>
+            <div class="avatar admin-only" style="background:#0F766E; display:none;">李</div>
             <div>
               <div class="name nurse-only">陳怡君</div>
-              <div class="name supervisor-only" style="display:none;">王俊宏</div>
+              <div class="name supervisor-only not-admin" style="display:none;">王俊宏</div>
+              <div class="name admin-only" style="display:none;">李董事長</div>
               <div class="role nurse-only">護理師</div>
-              <div class="role supervisor-only" style="display:none;">護理主任</div>
+              <div class="role supervisor-only not-admin" style="display:none;">護理主任</div>
+              <div class="role admin-only" style="display:none;">機構管理員</div>
             </div>
           </div>
         </div>
@@ -2556,8 +2956,8 @@
             <div><strong>財團法人台北市私立愛愛院</strong><span class="badge-y" style="background:#0EA5E9; color:#fff;">示範</span></div>
             <div class="meta-y">住宿式 · 台北市 · 115 年度</div>
           </a>
-          <div class="y-sep supervisor-only"></div>
-          <a class="y-item add supervisor-only" onclick="event.stopPropagation(); if(confirm('建立 116 年度評鑑？\n\n· 將 115 年度自動歸檔（保留所有資料）\n· 依新版基準建立 116 年度評鑑項次\n· 所有護理師需重新填寫\n\n確定繼續？')) alert('已建立 116 年度評鑑（系統設定 → 評鑑期間可修改細節）');">+ 建立 116 年度評鑑</a>
+          <div class="y-sep admin-only"></div>
+          <a class="y-item add admin-only" onclick="event.stopPropagation(); if(confirm('建立 116 年度評鑑？\n\n· 將 115 年度自動歸檔（保留所有資料）\n· 依新版基準建立 116 年度評鑑項次\n· 所有護理師需重新填寫\n\n確定繼續？')) alert('已建立 116 年度評鑑（系統設定 → 評鑑期間可修改細節）');">+ 建立 116 年度評鑑</a>
         </div>
       </div>
       <a class="nav-item" onclick="go('dashboard')"><span class="icon">📊</span>評鑑看板</a>
@@ -2565,7 +2965,7 @@
       <a class="nav-item" onclick="go('progress')"><span class="icon">📈</span>進度報表</a>
       <div class="nav-section">系統</div>
       <a class="nav-item" onclick="go('notifications')"><span class="icon">🔔</span>通知中心<span class="badge-inline">3</span></a>
-      <a class="nav-item supervisor-only" onclick="go('settings')"><span class="icon">⚙️</span>系統設定</a>
+      <a class="nav-item admin-only" onclick="go('settings')"><span class="icon">⚙️</span>系統設定</a>
       <a class="nav-item" onclick="go('profile')"><span class="icon">👤</span>個人設定</a>
     </aside>
 
@@ -2660,16 +3060,46 @@
                     <p style="color:var(--text-mute);">繼續輸入第 4–7 點執行說明...</p>
                   </div>
 
-                  <div class="sec-title mt-20">📎 佐證附件</div>
-                  <div class="upload-zone" onclick="alert('開啟檔案選擇器')">
+                  <div class="sec-title mt-20">📎 佐證附件 <small style="font-weight:400; color:var(--text-sub);">每筆附件需填寫「內容說明」（作為 PDF 縮圖標題）</small></div>
+                  <div class="upload-zone" onclick="openAttachUploadModal()">
                     <div class="ic">📂</div>
                     <strong>點擊或拖曳檔案上傳</strong>
-                    <small>支援 PDF / Word / Excel / JPG / PNG · 單檔上限 20 MB</small>
+                    <small>支援 PDF / Word / Excel / JPG / PNG · 單檔上限 20 MB · 上傳後將請您填寫內容說明</small>
                   </div>
                   <div class="attach-list">
-                    <div class="attach-item"><div class="ico-file">PDF</div><div class="info"><div class="nm">附件1_污物處理流程標準規範.pdf</div><small>1.2 MB · 陳怡君 · 2026/05/10</small></div><span class="act">👁</span><span class="act">⬇</span><span class="act danger">🗑</span></div>
-                    <div class="attach-item"><div class="ico-file">PDF</div><div class="info"><div class="nm">附件2_污物處理流程圖.pdf</div><small>820 KB</small></div><span class="act">👁</span><span class="act">⬇</span><span class="act danger">🗑</span></div>
-                    <div class="attach-item"><div class="ico-file img">JPG</div><div class="info"><div class="nm">附件3_污物處理空間照片.jpg</div><small>2.4 MB</small></div><span class="act">👁</span><span class="act">⬇</span><span class="act danger">🗑</span></div>
+                    <div class="attach-item">
+                      <div class="ico-file">PDF</div>
+                      <div class="info">
+                        <div class="nm">污物處理流程標準規範（含 SOP 與相關感控規範）</div>
+                        <small>📄 SOP_v2_clean.pdf · 1.2 MB · 陳怡君 · 2026/05/10</small>
+                      </div>
+                      <span class="act" title="編輯內容說明">✏</span>
+                      <span class="act">👁</span>
+                      <span class="act">⬇</span>
+                      <span class="act danger">🗑</span>
+                    </div>
+                    <div class="attach-item">
+                      <div class="ico-file">PDF</div>
+                      <div class="info">
+                        <div class="nm">污物處理流程圖（流程順序 / 動線標示）</div>
+                        <small>📄 workflow_chart.pdf · 820 KB · 陳怡君 · 2026/05/10</small>
+                      </div>
+                      <span class="act" title="編輯內容說明">✏</span>
+                      <span class="act">👁</span>
+                      <span class="act">⬇</span>
+                      <span class="act danger">🗑</span>
+                    </div>
+                    <div class="attach-item">
+                      <div class="ico-file img">JPG</div>
+                      <div class="info">
+                        <div class="nm">機構各樓層污物處理空間實景照片</div>
+                        <small>📄 IMG_20260510_113422.jpg · 2.4 MB · 陳怡君 · 2026/05/10</small>
+                      </div>
+                      <span class="act" title="編輯內容說明">✏</span>
+                      <span class="act">👁</span>
+                      <span class="act">⬇</span>
+                      <span class="act danger">🗑</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -2803,10 +3233,33 @@
                       </div>
 
                       <div class="attach-list" style="margin-top:10px;">
-                        <div class="attach-item"><div class="ico-file">PDF</div><div class="info"><div class="nm">附件1_114年度業務計畫書.pdf</div><small>1.8 MB</small></div><span class="act">👁</span><span class="act">⬇</span></div>
-                        <div class="attach-item"><div class="ico-file">PDF</div><div class="info"><div class="nm">附件2_113年董事會核定紀錄.pdf</div><small>820 KB</small></div><span class="act">👁</span><span class="act">⬇</span></div>
+                        <div class="attach-item">
+                          <div class="ico-file">PDF</div>
+                          <div class="info">
+                            <div class="nm">114 年度業務計畫書（含願景、目標、執行策略與績效指標）</div>
+                            <small>📄 plan_v3_final.pdf · 1.8 MB · 陳怡君 · 2026/05/10</small>
+                          </div>
+                          <span class="act" title="編輯內容說明" onclick="alert('編輯此附件的內容說明（將顯示為 PDF 縮圖標題）')">✏</span>
+                          <span class="act">👁</span>
+                          <span class="act">⬇</span>
+                          <span class="act danger">🗑</span>
+                        </div>
+                        <div class="attach-item">
+                          <div class="ico-file">PDF</div>
+                          <div class="info">
+                            <div class="nm">113/12/20 董事會核定 114 年度業務計畫之會議紀錄（第 7 案）</div>
+                            <small>📄 board_meeting_2024-12.pdf · 820 KB · 陳怡君 · 2026/05/10</small>
+                          </div>
+                          <span class="act" title="編輯內容說明">✏</span>
+                          <span class="act">👁</span>
+                          <span class="act">⬇</span>
+                          <span class="act danger">🗑</span>
+                        </div>
                       </div>
-                      <button class="btn btn-secondary btn-sm" style="margin-top:8px;" onclick="alert('上傳此項次附件')">+ 上傳附件</button>
+                      <button class="btn btn-secondary btn-sm" style="margin-top:8px;" onclick="openAttachUploadModal()">+ 上傳附件</button>
+                      <p style="font-size:11px; color:var(--text-sub); margin-top:6px;">
+                        💡 「內容說明」會作為 PDF 中該附件縮圖的欄位標題，請以一句話清楚描述（如「114 年度業務計畫書」）。
+                      </p>
                     </div>
                   </div>
 
@@ -2849,11 +3302,44 @@
                       </div>
 
                       <div class="attach-list" style="margin-top:10px;">
-                        <div class="attach-item"><div class="ico-file">PDF</div><div class="info"><div class="nm">附件3_季檢討會議紀錄_114Q1-Q4.pdf</div><small>3.2 MB</small></div><span class="act">👁</span><span class="act">⬇</span></div>
-                        <div class="attach-item"><div class="ico-file">PDF</div><div class="info"><div class="nm">附件4_計畫修正紀錄.pdf</div><small>720 KB</small></div><span class="act">👁</span><span class="act">⬇</span></div>
-                        <div class="attach-item"><div class="ico-file xls">XLS</div><div class="info"><div class="nm">附件5_115Q1個案服務量達成表.xlsx</div><small>180 KB</small></div><span class="act">👁</span><span class="act">⬇</span></div>
+                        <div class="attach-item">
+                          <div class="ico-file">PDF</div>
+                          <div class="info">
+                            <div class="nm">114 年 Q1-Q4 業務檢討會議紀錄合輯</div>
+                            <small>📄 quarterly_review_2025.pdf · 3.2 MB · 王主任 · 2026/05/11</small>
+                          </div>
+                          <span class="act" title="編輯內容說明">✏</span>
+                          <span class="act">👁</span>
+                          <span class="act">⬇</span>
+                          <span class="act danger">🗑</span>
+                        </div>
+                        <div class="attach-item">
+                          <div class="ico-file">PDF</div>
+                          <div class="info">
+                            <div class="nm">113 年度業務計畫 v1.1 / v1.2 修正對照與原因說明</div>
+                            <small>📄 revision_log.pdf · 720 KB · 陳怡君 · 2026/05/11</small>
+                          </div>
+                          <span class="act" title="編輯內容說明">✏</span>
+                          <span class="act">👁</span>
+                          <span class="act">⬇</span>
+                          <span class="act danger">🗑</span>
+                        </div>
+                        <div class="attach-item">
+                          <div class="ico-file xls">XLS</div>
+                          <div class="info">
+                            <div class="nm">115Q1 個案服務量月度統計（含目標、實際、達成率與圖表）</div>
+                            <small>📄 case_stats_2026Q1.xlsx · 180 KB · 陳怡君 · 2026/05/12</small>
+                          </div>
+                          <span class="act" title="編輯內容說明">✏</span>
+                          <span class="act">👁</span>
+                          <span class="act">⬇</span>
+                          <span class="act danger">🗑</span>
+                        </div>
                       </div>
-                      <button class="btn btn-secondary btn-sm" style="margin-top:8px;" onclick="alert('上傳此項次附件')">+ 上傳附件</button>
+                      <button class="btn btn-secondary btn-sm" style="margin-top:8px;" onclick="openAttachUploadModal()">+ 上傳附件</button>
+                      <p style="font-size:11px; color:var(--text-sub); margin-top:6px;">
+                        💡 「內容說明」會作為 PDF 中該附件縮圖的欄位標題，請以一句話清楚描述。
+                      </p>
                     </div>
                   </div>
 
@@ -2934,8 +3420,8 @@
             <div><strong>財團法人台北市私立愛愛院</strong><span class="badge-y" style="background:#0EA5E9; color:#fff;">示範</span></div>
             <div class="meta-y">住宿式 · 台北市 · 115 年度</div>
           </a>
-          <div class="y-sep supervisor-only"></div>
-          <a class="y-item add supervisor-only" onclick="event.stopPropagation(); if(confirm('建立 116 年度評鑑？\n\n· 將 115 年度自動歸檔（保留所有資料）\n· 依新版基準建立 116 年度評鑑項次\n· 所有護理師需重新填寫\n\n確定繼續？')) alert('已建立 116 年度評鑑（系統設定 → 評鑑期間可修改細節）');">+ 建立 116 年度評鑑</a>
+          <div class="y-sep admin-only"></div>
+          <a class="y-item add admin-only" onclick="event.stopPropagation(); if(confirm('建立 116 年度評鑑？\n\n· 將 115 年度自動歸檔（保留所有資料）\n· 依新版基準建立 116 年度評鑑項次\n· 所有護理師需重新填寫\n\n確定繼續？')) alert('已建立 116 年度評鑑（系統設定 → 評鑑期間可修改細節）');">+ 建立 116 年度評鑑</a>
         </div>
       </div>
       <a class="nav-item" onclick="go('dashboard')"><span class="icon">📊</span>評鑑看板</a>
@@ -3114,8 +3600,8 @@
             <div><strong>財團法人台北市私立愛愛院</strong><span class="badge-y" style="background:#0EA5E9; color:#fff;">示範</span></div>
             <div class="meta-y">住宿式 · 台北市 · 115 年度</div>
           </a>
-          <div class="y-sep supervisor-only"></div>
-          <a class="y-item add supervisor-only" onclick="event.stopPropagation(); if(confirm('建立 116 年度評鑑？\n\n· 將 115 年度自動歸檔（保留所有資料）\n· 依新版基準建立 116 年度評鑑項次\n· 所有護理師需重新填寫\n\n確定繼續？')) alert('已建立 116 年度評鑑（系統設定 → 評鑑期間可修改細節）');">+ 建立 116 年度評鑑</a>
+          <div class="y-sep admin-only"></div>
+          <a class="y-item add admin-only" onclick="event.stopPropagation(); if(confirm('建立 116 年度評鑑？\n\n· 將 115 年度自動歸檔（保留所有資料）\n· 依新版基準建立 116 年度評鑑項次\n· 所有護理師需重新填寫\n\n確定繼續？')) alert('已建立 116 年度評鑑（系統設定 → 評鑑期間可修改細節）');">+ 建立 116 年度評鑑</a>
         </div>
       </div>
       <a class="nav-item" onclick="go('dashboard')"><span class="icon">📊</span>評鑑看板</a>
@@ -3123,7 +3609,7 @@
       <a class="nav-item" onclick="go('progress')"><span class="icon">📈</span>進度報表</a>
       <div class="nav-section">系統</div>
       <a class="nav-item" onclick="go('notifications')"><span class="icon">🔔</span>通知中心<span class="badge-inline">3</span></a>
-      <a class="nav-item supervisor-only" onclick="go('settings')"><span class="icon">⚙️</span>系統設定</a>
+      <a class="nav-item admin-only" onclick="go('settings')"><span class="icon">⚙️</span>系統設定</a>
       <a class="nav-item" onclick="go('profile')"><span class="icon">👤</span>個人設定</a>
     </aside>
 
@@ -3275,8 +3761,8 @@
             <div><strong>財團法人台北市私立愛愛院</strong><span class="badge-y" style="background:#0EA5E9; color:#fff;">示範</span></div>
             <div class="meta-y">住宿式 · 台北市 · 115 年度</div>
           </a>
-          <div class="y-sep supervisor-only"></div>
-          <a class="y-item add supervisor-only" onclick="event.stopPropagation(); if(confirm('建立 116 年度評鑑？\n\n· 將 115 年度自動歸檔（保留所有資料）\n· 依新版基準建立 116 年度評鑑項次\n· 所有護理師需重新填寫\n\n確定繼續？')) alert('已建立 116 年度評鑑（系統設定 → 評鑑期間可修改細節）');">+ 建立 116 年度評鑑</a>
+          <div class="y-sep admin-only"></div>
+          <a class="y-item add admin-only" onclick="event.stopPropagation(); if(confirm('建立 116 年度評鑑？\n\n· 將 115 年度自動歸檔（保留所有資料）\n· 依新版基準建立 116 年度評鑑項次\n· 所有護理師需重新填寫\n\n確定繼續？')) alert('已建立 116 年度評鑑（系統設定 → 評鑑期間可修改細節）');">+ 建立 116 年度評鑑</a>
         </div>
       </div>
       <a class="nav-item" onclick="go('dashboard')"><span class="icon">📊</span>評鑑看板</a>
@@ -3284,7 +3770,7 @@
       <a class="nav-item" onclick="go('progress')"><span class="icon">📈</span>進度報表</a>
       <div class="nav-section">系統</div>
       <a class="nav-item" onclick="go('notifications')"><span class="icon">🔔</span>通知中心<span class="badge-inline">3</span></a>
-      <a class="nav-item supervisor-only" onclick="go('settings')"><span class="icon">⚙️</span>系統設定</a>
+      <a class="nav-item admin-only" onclick="go('settings')"><span class="icon">⚙️</span>系統設定</a>
       <a class="nav-item" onclick="go('profile')"><span class="icon">👤</span>個人設定</a>
     </aside>
 
@@ -3332,10 +3818,28 @@
             </div>
             <div class="panel-body" style="background: var(--bg); padding: 30px;">
 
+              <!-- ⚠️ 開發注意（給 Claude Code）-->
+              <div style="margin:-12px 0 16px; padding:14px 16px; background:#FFFBEB; border:2px dashed #F59E0B; border-radius:8px; font-size:12px; line-height:1.7; color:#92400E;">
+                <strong style="font-size:13px;">🛠️ 開發實作注意（住宿式 PDF 格式）</strong><br>
+                以下住宿式 PDF 預覽為較早版本的簡化示意。<strong>實際開發時，住宿式 PDF 須與居家式採用相同設計系統</strong>，僅評鑑表格的內部結構不同（住宿式 5 級 ABCDE / 居家式 4 級 ABCD）。請套用以下四大原則：
+                <ol style="margin:8px 0 0 18px; padding:0;">
+                  <li><strong>機構 Logo 標頭</strong>：左 Logo + 右機構名稱，參照 <code>.pdf-header-row</code> CSS</li>
+                  <li><strong>評鑑基準表欄寬</strong>：分配以「基準說明」為主，共識欄縮窄至最小可讀寬度</li>
+                  <li><strong>填寫人 / 審核主管</strong>：整併至「自評結果與執行現況」表底部，不另立『總分摘要』段</li>
+                  <li><strong>佐證附件採縮圖網格</strong>：欄位標題 = 護理師填寫的內容說明（非檔名），每列最多 2 個附件，參照 <code>.pdf-attach-inline</code> CSS 與居家式項次 1/2 之示範</li>
+                </ol>
+                完整參考實作請見 <strong>居家式 PDF 預覽（home-done-view .pdf-preview）</strong>，所有 CSS class 都可重用。
+              </div>
+
               <div class="pdf-preview">
                 <div class="pdf-header">
-                  <h1>財團法人台北市私立愛愛院</h1>
-                  <p>115 年度老人福利機構評鑑指標</p>
+                  <div class="pdf-header-row">
+                    <div class="pdf-logo" title="機構 Logo（可於系統設定 → 機構基本資料上傳）">愛</div>
+                    <div class="pdf-title">
+                      <h1>財團法人台北市私立愛愛院</h1>
+                      <p>115 年度老人福利機構評鑑指標</p>
+                    </div>
+                  </div>
                 </div>
                 <table>
                   <tr><th>指　　標</th><td>A. 行政管理</td></tr>
@@ -3415,8 +3919,13 @@
               <!-- ===== 居家式 PDF 表格樣式預覽 ===== -->
               <div class="pdf-preview pdf-home">
                 <div class="pdf-header">
-                  <h1>湖水綠長照機構</h1>
-                  <p>115 年度新北市居家式長期照顧服務機構評鑑基準</p>
+                  <div class="pdf-header-row">
+                    <div class="pdf-logo" title="機構 Logo（可於系統設定 → 機構基本資料上傳）">湖</div>
+                    <div class="pdf-title">
+                      <h1>湖水綠長照機構</h1>
+                      <p>115 年度新北市居家式長期照顧服務機構評鑑基準</p>
+                    </div>
+                  </div>
                 </div>
 
                 <!-- 封面評鑑基準表 (依官方 PDF 表格樣式) -->
@@ -3424,12 +3933,12 @@
                 <table class="pdf-table-home">
                   <thead>
                     <tr>
-                      <th style="width:60px;">代碼</th>
-                      <th style="width:120px;">共識基準</th>
+                      <th style="width:48px;">代碼</th>
+                      <th style="width:96px;">共識基準</th>
                       <th>基準說明</th>
-                      <th style="width:130px;">評核方式</th>
-                      <th style="width:160px;">115 年委員共識</th>
-                      <th style="width:55px;">分數</th>
+                      <th style="width:118px;">評核方式</th>
+                      <th style="width:96px;">115 年<br>委員共識</th>
+                      <th style="width:46px;">分數</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -3444,7 +3953,7 @@
                         3. 現場與業務負責人會談。<br>
                         4. 業務負責人未出席本項逕評核為 D。
                       </td>
-                      <td style="font-size:11px;">
+                      <td style="font-size:10.5px; line-height:1.6;">
                         A：4 項符合<br>
                         B：2-3 項符合<br>
                         C：1 項符合<br>
@@ -3454,7 +3963,7 @@
                     </tr>
                     <tr>
                       <td>2. 定期檢視與修正計畫，並有執行、紀錄及具體績效，對計畫目標達成情形提出檢討改善策略。</td>
-                      <td style="font-size:11px;">
+                      <td style="font-size:10.5px; line-height:1.6;">
                         A：4 項符合<br>
                         B：2-3 項符合<br>
                         C：1 項符合<br>
@@ -3469,7 +3978,7 @@
                   </tbody>
                 </table>
 
-                <!-- 自評結果與得分 -->
+                <!-- 自評結果與得分（已整併「填寫人 / 審核主管」資訊）-->
                 <h3 style="font-size:14px; margin: 24px 0 8px;">二、機構自評結果與執行現況</h3>
                 <table class="pdf-table-home">
                   <thead>
@@ -3477,8 +3986,8 @@
                       <th style="width:50px;">項次</th>
                       <th>基準說明摘要</th>
                       <th style="width:90px;">自評等級</th>
-                      <th style="width:80px;">配分</th>
-                      <th style="width:80px;">實得分數</th>
+                      <th style="width:60px;">配分</th>
+                      <th style="width:70px;">實得分數</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -3499,12 +4008,20 @@
                     <tr>
                       <td colspan="3" style="text-align:right; font-weight:600; background:#FAFAFA;">A1 共識基準小計</td>
                       <td style="text-align:center; font-weight:700; background:#FAFAFA;">5.0</td>
-                      <td style="text-align:center; font-weight:700; color:#0F766E; background:#FAFAFA;">4.167</td>
+                      <td style="text-align:center; font-weight:700; color:#0F766E; background:#FAFAFA;">4.167 (83.3%)</td>
+                    </tr>
+                    <tr>
+                      <th style="text-align:right; background:#F0FDFA; width:90px;">填寫人</th>
+                      <td colspan="4" style="font-size:11.5px;">陳怡君　護理師　·　完成時間 2026/05/12 11:30</td>
+                    </tr>
+                    <tr>
+                      <th style="text-align:right; background:#F0FDFA;">審核主管</th>
+                      <td colspan="4" style="font-size:11.5px;">張主任　·　審核通過 2026/05/13 09:45</td>
                     </tr>
                   </tbody>
                 </table>
 
-                <!-- 執行現況說明 -->
+                <!-- 執行現況說明（附件已嵌入每個項次說明表內）-->
                 <h3 style="font-size:14px; margin: 24px 0 8px;">三、執行現況說明（依項次）</h3>
 
                 <div class="pdf-sub-item">
@@ -3514,7 +4031,22 @@
                   </div>
                   <div class="pdf-sub-body">
                     <p>本機構於 114 年度訂定《湖水綠長照機構年度業務計畫》，內容包含發展願景、年度目標、執行策略與績效指標。計畫由業務負責人主持規劃會議擬定，並於 113 年 12 月經董事會核定通過。</p>
-                    <p style="font-size:11px; color:var(--text-sub); margin-top:6px;"><strong>佐證附件：</strong>附件 1（114 年度業務計畫書）、附件 2（113 年董事會核定紀錄）</p>
+
+                    <div class="pdf-attach-inline-title">📎 佐證附件（2 份）　·　欄位標題為護理師上傳時填寫的內容說明</div>
+                    <table class="pdf-attach-inline">
+                      <thead>
+                        <tr>
+                          <th>114 年度業務計畫書（含願景、目標、執行策略與績效指標）</th>
+                          <th>113/12/20 董事會核定 114 年度業務計畫之會議紀錄（第 7 案）</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><div class="att-thumb pdf">PDF</div></td>
+                          <td><div class="att-thumb pdf">PDF</div></td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
 
@@ -3525,21 +4057,36 @@
                   </div>
                   <div class="pdf-sub-body">
                     <p>業務負責人每季召開檢討會議，逐季檢視業務計畫執行情形與績效達成度（附件 3）。113 年度共修正計畫 2 次（附件 4 為修正紀錄），114 年針對個案服務量未達標進行檢討，並擬訂招募策略，已於 115Q1 達成（附件 5）。</p>
-                    <p style="font-size:11px; color:var(--text-sub); margin-top:6px;"><strong>佐證附件：</strong>附件 3（季檢討會議紀錄）、附件 4（計畫修正紀錄）、附件 5（115Q1 個案服務量達成表）</p>
+
+                    <div class="pdf-attach-inline-title">📎 佐證附件（3 份）　·　欄位標題為護理師上傳時填寫的內容說明</div>
+                    <table class="pdf-attach-inline">
+                      <thead>
+                        <tr>
+                          <th>114 年 Q1-Q4 業務檢討會議紀錄合輯</th>
+                          <th>113 年度業務計畫 v1.1 / v1.2 修正對照與原因說明</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><div class="att-thumb pdf">PDF</div></td>
+                          <td><div class="att-thumb pdf">PDF</div></td>
+                        </tr>
+                      </tbody>
+                      <thead>
+                        <tr>
+                          <th colspan="2">115Q1 個案服務量月度統計（含目標、實際、達成率與圖表）</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="height:160px;"><div class="att-thumb xls" style="max-width:380px; height:140px; line-height:140px;">XLS</div></td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
 
-                <!-- 總分摘要 -->
-                <h3 style="font-size:14px; margin: 24px 0 8px;">四、本共識基準總分摘要</h3>
-                <table class="pdf-table-home">
-                  <tr><th style="width:30%; background:#F0FDFA;">共識基準</th><td>A1 業務計畫擬訂與執行</td></tr>
-                  <tr><th style="background:#F0FDFA;">總配分</th><td>5.0 分</td></tr>
-                  <tr><th style="background:#F0FDFA;">機構自評實得</th><td style="color:#0F766E; font-weight:700; font-size:14px;">4.167 / 5.0 分（83.3%）</td></tr>
-                  <tr><th style="background:#F0FDFA;">填寫人</th><td>陳怡君 護理師　·　完成時間 2026/05/12 11:30</td></tr>
-                  <tr><th style="background:#F0FDFA;">主管審核</th><td>張主任　·　審核通過 2026/05/13 09:45</td></tr>
-                </table>
-
-                <p style="margin-top:30px; font-size:11px; color:var(--text-sub); text-align:right;">— A1 第 1 頁，共 12 頁（含附件 5 份）—　·　文件 ID: A1-2026-0512-EJ</p>
+                <p style="margin-top:24px; font-size:11px; color:var(--text-sub); text-align:right;">— A1 共識基準完　·　共 2 頁　·　文件 ID: A1-2026-0512-EJ —</p>
               </div>
 
             </div>
@@ -3547,23 +4094,26 @@
 
           <div class="panel">
             <div class="panel-head">
-              <div class="title">附件清單 <small>下載 PDF 時將自動整合附件，每附件對應的項次也會標註</small></div>
+              <div class="title">附件清單 <small>PDF 中以表格嵌入項次說明；點此可下載原始檔案 ZIP 供評鑑委員深入查閱</small></div>
               <button class="btn btn-secondary btn-sm" onclick="alert('下載 ZIP：包含此項次所有原始檔案')">📦 下載原始 ZIP</button>
             </div>
             <div class="panel-body">
               <div class="attach-list">
-                <div class="attach-item"><div class="ico-file">PDF</div><div class="info"><div class="nm">附件1_114年度業務計畫書.pdf</div><small>1.8 MB · 對應「項次 1」 · PDF 第 4-5 頁</small></div><span class="act">👁</span><span class="act">⬇</span></div>
-                <div class="attach-item"><div class="ico-file">PDF</div><div class="info"><div class="nm">附件2_113年董事會核定紀錄.pdf</div><small>820 KB · 對應「項次 1」 · PDF 第 6 頁</small></div><span class="act">👁</span><span class="act">⬇</span></div>
-                <div class="attach-item"><div class="ico-file">PDF</div><div class="info"><div class="nm">附件3_季檢討會議紀錄_114Q1-Q4.pdf</div><small>3.2 MB · 對應「項次 2」 · PDF 第 7-9 頁</small></div><span class="act">👁</span><span class="act">⬇</span></div>
-                <div class="attach-item"><div class="ico-file">PDF</div><div class="info"><div class="nm">附件4_計畫修正紀錄.pdf</div><small>720 KB · 對應「項次 2」 · PDF 第 10 頁</small></div><span class="act">👁</span><span class="act">⬇</span></div>
-                <div class="attach-item"><div class="ico-file xls">XLS</div><div class="info"><div class="nm">附件5_115Q1個案服務量達成表.xlsx</div><small>180 KB · 對應「項次 2」 · PDF 第 11-12 頁</small></div><span class="act">👁</span><span class="act">⬇</span></div>
+                <div class="attach-item"><div class="ico-file">PDF</div><div class="info"><div class="nm">114 年度業務計畫書（含願景、目標、執行策略與績效指標）</div><small>檔名：plan_v3_final.pdf · 1.8 MB · 對應「項次 1」</small></div><span class="act">👁</span><span class="act">⬇</span></div>
+                <div class="attach-item"><div class="ico-file">PDF</div><div class="info"><div class="nm">113/12/20 董事會核定 114 年度業務計畫之會議紀錄（第 7 案）</div><small>檔名：board_meeting_2024-12.pdf · 820 KB · 對應「項次 1」</small></div><span class="act">👁</span><span class="act">⬇</span></div>
+                <div class="attach-item"><div class="ico-file">PDF</div><div class="info"><div class="nm">114 年 Q1-Q4 業務檢討會議紀錄合輯</div><small>檔名：quarterly_review_2025.pdf · 3.2 MB · 對應「項次 2」</small></div><span class="act">👁</span><span class="act">⬇</span></div>
+                <div class="attach-item"><div class="ico-file">PDF</div><div class="info"><div class="nm">113 年度業務計畫 v1.1 / v1.2 修正對照與原因說明</div><small>檔名：revision_log.pdf · 720 KB · 對應「項次 2」</small></div><span class="act">👁</span><span class="act">⬇</span></div>
+                <div class="attach-item"><div class="ico-file xls">XLS</div><div class="info"><div class="nm">115Q1 個案服務量月度統計（含目標、實際、達成率與圖表）</div><small>檔名：case_stats_2026Q1.xlsx · 180 KB · 對應「項次 2」</small></div><span class="act">👁</span><span class="act">⬇</span></div>
               </div>
+              <p style="font-size:11px; color:var(--text-sub); margin-top:12px; padding:10px; background:#F0FDFA; border-radius:6px; border-left:3px solid var(--primary);">
+                💡 <strong>附件呈現策略：</strong>為避免每份評鑑報告動輒上百頁，附件以「縮圖網格」嵌入每個項次說明區，<strong>欄位標題即為護理師上傳時填寫的「內容說明」</strong>（不顯示原始檔名，因實務上常見隨意命名或為相機原始編號）。每列最多放 2 個附件並排。原始檔案保留系統內，評鑑委員若需深入檢視可透過上方 ZIP 下載或登入系統查閱。
+              </p>
             </div>
           </div>
         </div>
 
         <div class="design-note">
-          <span class="tag">E</span>已完成頁設計重點：<strong>支援住宿式 / 居家式雙模式 PDF 預覽</strong>；居家式 PDF 採用新北市政府高齡長期照顧處官方表格樣式，含「評鑑基準封面表（含 rowspan 合併儲存格）」+「自評結果分數表」+「項次執行現況」+「總分摘要」四個區塊，可如實還原評鑑委員看到的格式；附件清單會標註每附件對應的項次與 PDF 頁碼，方便後續追溯
+          <span class="tag">E</span>已完成頁設計重點：<strong>支援住宿式 / 居家式雙模式 PDF 預覽</strong>；居家式 PDF 採用新北市政府高齡長期照顧處官方表格樣式，含「機構 Logo 標頭」+「評鑑基準封面表（含 rowspan 合併儲存格）」+「自評結果分數表（已整併填寫人/審核主管欄）」+「項次執行現況（附件以表格嵌入）」三個區塊，可如實還原評鑑委員看到的格式；附件以縮圖表格嵌入避免報告過長，原始檔案可透過 ZIP 下載
         </div>
       </div>
     </div>
@@ -3591,8 +4141,8 @@
             <div><strong>財團法人台北市私立愛愛院</strong><span class="badge-y" style="background:#0EA5E9; color:#fff;">示範</span></div>
             <div class="meta-y">住宿式 · 台北市 · 115 年度</div>
           </a>
-          <div class="y-sep supervisor-only"></div>
-          <a class="y-item add supervisor-only" onclick="event.stopPropagation(); if(confirm('建立 116 年度評鑑？\n\n· 將 115 年度自動歸檔（保留所有資料）\n· 依新版基準建立 116 年度評鑑項次\n· 所有護理師需重新填寫\n\n確定繼續？')) alert('已建立 116 年度評鑑（系統設定 → 評鑑期間可修改細節）');">+ 建立 116 年度評鑑</a>
+          <div class="y-sep admin-only"></div>
+          <a class="y-item add admin-only" onclick="event.stopPropagation(); if(confirm('建立 116 年度評鑑？\n\n· 將 115 年度自動歸檔（保留所有資料）\n· 依新版基準建立 116 年度評鑑項次\n· 所有護理師需重新填寫\n\n確定繼續？')) alert('已建立 116 年度評鑑（系統設定 → 評鑑期間可修改細節）');">+ 建立 116 年度評鑑</a>
         </div>
       </div>
       <a class="nav-item" onclick="go('dashboard')"><span class="icon">📊</span>評鑑看板</a>
@@ -3740,8 +4290,8 @@
             <div><strong>財團法人台北市私立愛愛院</strong><span class="badge-y" style="background:#0EA5E9; color:#fff;">示範</span></div>
             <div class="meta-y">住宿式 · 台北市 · 115 年度</div>
           </a>
-          <div class="y-sep supervisor-only"></div>
-          <a class="y-item add supervisor-only" onclick="event.stopPropagation(); if(confirm('建立 116 年度評鑑？\n\n· 將 115 年度自動歸檔（保留所有資料）\n· 依新版基準建立 116 年度評鑑項次\n· 所有護理師需重新填寫\n\n確定繼續？')) alert('已建立 116 年度評鑑（系統設定 → 評鑑期間可修改細節）');">+ 建立 116 年度評鑑</a>
+          <div class="y-sep admin-only"></div>
+          <a class="y-item add admin-only" onclick="event.stopPropagation(); if(confirm('建立 116 年度評鑑？\n\n· 將 115 年度自動歸檔（保留所有資料）\n· 依新版基準建立 116 年度評鑑項次\n· 所有護理師需重新填寫\n\n確定繼續？')) alert('已建立 116 年度評鑑（系統設定 → 評鑑期間可修改細節）');">+ 建立 116 年度評鑑</a>
         </div>
       </div>
       <a class="nav-item" onclick="go('dashboard')"><span class="icon">📊</span>評鑑看板</a>
@@ -3749,7 +4299,7 @@
       <a class="nav-item active" onclick="go('progress')"><span class="icon">📈</span>進度報表</a>
       <div class="nav-section">系統</div>
       <a class="nav-item" onclick="go('notifications')"><span class="icon">🔔</span>通知中心<span class="badge-inline">3</span></a>
-      <a class="nav-item supervisor-only" onclick="go('settings')"><span class="icon">⚙️</span>系統設定</a>
+      <a class="nav-item admin-only" onclick="go('settings')"><span class="icon">⚙️</span>系統設定</a>
       <a class="nav-item" onclick="go('profile')"><span class="icon">👤</span>個人設定</a>
     </aside>
 
@@ -3977,8 +4527,8 @@
             <div><strong>財團法人台北市私立愛愛院</strong><span class="badge-y" style="background:#0EA5E9; color:#fff;">示範</span></div>
             <div class="meta-y">住宿式 · 台北市 · 115 年度</div>
           </a>
-          <div class="y-sep supervisor-only"></div>
-          <a class="y-item add supervisor-only" onclick="event.stopPropagation(); if(confirm('建立 116 年度評鑑？\n\n· 將 115 年度自動歸檔（保留所有資料）\n· 依新版基準建立 116 年度評鑑項次\n· 所有護理師需重新填寫\n\n確定繼續？')) alert('已建立 116 年度評鑑（系統設定 → 評鑑期間可修改細節）');">+ 建立 116 年度評鑑</a>
+          <div class="y-sep admin-only"></div>
+          <a class="y-item add admin-only" onclick="event.stopPropagation(); if(confirm('建立 116 年度評鑑？\n\n· 將 115 年度自動歸檔（保留所有資料）\n· 依新版基準建立 116 年度評鑑項次\n· 所有護理師需重新填寫\n\n確定繼續？')) alert('已建立 116 年度評鑑（系統設定 → 評鑑期間可修改細節）');">+ 建立 116 年度評鑑</a>
         </div>
       </div>
       <a class="nav-item" onclick="go('dashboard')"><span class="icon">📊</span>評鑑看板</a>
@@ -3986,7 +4536,7 @@
       <a class="nav-item" onclick="go('progress')"><span class="icon">📈</span>進度報表</a>
       <div class="nav-section">系統</div>
       <a class="nav-item active" onclick="go('notifications')"><span class="icon">🔔</span>通知中心<span class="badge-inline">3</span></a>
-      <a class="nav-item supervisor-only" onclick="go('settings')"><span class="icon">⚙️</span>系統設定</a>
+      <a class="nav-item admin-only" onclick="go('settings')"><span class="icon">⚙️</span>系統設定</a>
       <a class="nav-item" onclick="go('profile')"><span class="icon">👤</span>個人設定</a>
     </aside>
 
@@ -4154,8 +4704,8 @@
             <div><strong>財團法人台北市私立愛愛院</strong><span class="badge-y" style="background:#0EA5E9; color:#fff;">示範</span></div>
             <div class="meta-y">住宿式 · 台北市 · 115 年度</div>
           </a>
-          <div class="y-sep supervisor-only"></div>
-          <a class="y-item add supervisor-only" onclick="event.stopPropagation(); if(confirm('建立 116 年度評鑑？\n\n· 將 115 年度自動歸檔（保留所有資料）\n· 依新版基準建立 116 年度評鑑項次\n· 所有護理師需重新填寫\n\n確定繼續？')) alert('已建立 116 年度評鑑（系統設定 → 評鑑期間可修改細節）');">+ 建立 116 年度評鑑</a>
+          <div class="y-sep admin-only"></div>
+          <a class="y-item add admin-only" onclick="event.stopPropagation(); if(confirm('建立 116 年度評鑑？\n\n· 將 115 年度自動歸檔（保留所有資料）\n· 依新版基準建立 116 年度評鑑項次\n· 所有護理師需重新填寫\n\n確定繼續？')) alert('已建立 116 年度評鑑（系統設定 → 評鑑期間可修改細節）');">+ 建立 116 年度評鑑</a>
         </div>
       </div>
       <a class="nav-item" onclick="go('dashboard')"><span class="icon">📊</span>評鑑看板</a>
@@ -4222,12 +4772,20 @@
                   </div>
                 </div>
                 <div class="form-row">
-                  <label>機構 Logo</label>
+                  <label>機構 Logo<small>同時顯示於 sidebar 與評鑑 PDF 標頭</small></label>
                   <div class="field">
-                    <div style="display:flex; gap:10px; align-items:center;">
-                      <div style="width:48px; height:48px; background:var(--primary); color:white; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:600;">愛</div>
-                      <button class="btn btn-secondary btn-sm">📷 上傳 Logo</button>
-                      <small>建議 PNG 透明背景 · 顯示於 sidebar 頭像位置</small>
+                    <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
+                      <div style="width:64px; height:64px; background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%); color:white; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:26px; font-weight:800; box-shadow:0 2px 4px rgba(0,0,0,0.1);">愛</div>
+                      <div style="display:flex; flex-direction:column; gap:6px;">
+                        <div style="display:flex; gap:6px;">
+                          <button class="btn btn-secondary btn-sm" onclick="alert('開啟檔案選擇器，建議 512×512 PNG / SVG')">📷 上傳 Logo</button>
+                          <button class="btn btn-secondary btn-sm" onclick="alert('恢復為文字 Logo（取機構名稱首字）')">🔄 還原預設</button>
+                        </div>
+                        <small style="color:var(--text-sub);">建議 PNG / SVG 透明背景，1:1 方形 · 512×512 ↑ · ≤ 2MB</small>
+                      </div>
+                    </div>
+                    <div style="margin-top:12px; padding:10px 12px; background:#F0FDFA; border-radius:6px; border-left:3px solid var(--primary); font-size:11px; color:var(--text-sub);">
+                      💡 上傳後將同時更新：<strong>① Sidebar 頭像</strong>、<strong>② 評鑑 PDF 標頭</strong>、<strong>③ 寄出的 Email 通知信抬頭</strong>。Logo 變更會即時套用，不影響歷年已歸檔評鑑報告。
                     </div>
                   </div>
                 </div>
@@ -4387,31 +4945,127 @@
             <!-- 帳號管理 -->
             <div class="panel">
               <div class="panel-head">
-                <div class="title">👥 帳號管理 <small>本評鑑週期使用者</small></div>
-                <button class="btn btn-secondary btn-sm" onclick="alert('邀請使用者')">+ 邀請</button>
+                <div class="title">👥 帳號管理 <small>所有員工帳號由機構統一建立、指派角色</small></div>
+                <button class="btn btn-primary btn-sm" onclick="document.getElementById('user-invite-modal').classList.add('open'); document.body.style.overflow='hidden';">+ 新增使用者</button>
               </div>
-              <div class="panel-body">
-                <div class="account-row">
-                  <div class="avatar-lg sup">王</div>
-                  <div>
-                    <div style="font-weight:600; font-size:14px;">王俊宏（您）</div>
-                    <div style="font-size:11px; color:var(--text-sub);">supervisor@aiai.org.tw · 護理主任</div>
-                  </div>
-                  <div><span class="badge done"><span class="dot"></span>啟用中</span></div>
-                  <div style="text-align:right;"><button class="btn btn-ghost btn-sm">⋯</button></div>
-                </div>
-                <div class="account-row">
-                  <div class="avatar-lg">陳</div>
-                  <div>
-                    <div style="font-weight:600; font-size:14px;">陳怡君</div>
-                    <div style="font-size:11px; color:var(--text-sub);">nurse@aiai.org.tw · 護理師 · 最近登入 5 分鐘前</div>
-                  </div>
-                  <div><span class="badge done"><span class="dot"></span>啟用中</span></div>
-                  <div style="text-align:right;"><button class="btn btn-ghost btn-sm">⋯</button></div>
-                </div>
+
+              <!-- 統計列 -->
+              <div style="padding:12px 18px; background:var(--bg); border-bottom:1px solid var(--border-light); display:flex; gap:24px; font-size:12px;">
+                <span>👥 總計 <strong>4</strong> 位</span>
+                <span style="color:var(--status-done);">✓ 啟用中 <strong>3</strong></span>
+                <span style="color:var(--status-revise);">⏳ 待接受邀請 <strong>1</strong></span>
+                <span style="color:var(--text-mute);">○ 已停用 <strong>0</strong></span>
               </div>
-              <div style="padding:12px 18px; background:var(--primary-soft); border-top:1px solid var(--border-light); font-size:12px; color:var(--text-sub);">
-                💡 目前採<strong>每角色單一帳號</strong>設計：所有護理師共用「陳怡君」帳號登入；所有主管共用「王俊宏」帳號登入。如未來需獨立帳號可在此新增。
+
+              <!-- 篩選列 -->
+              <div class="filter-row">
+                <span class="lbl">角色：</span>
+                <select>
+                  <option>全部</option>
+                  <option>機構管理員</option>
+                  <option>主管</option>
+                  <option>護理師</option>
+                </select>
+                <span class="lbl">狀態：</span>
+                <select>
+                  <option>全部</option>
+                  <option>啟用中</option>
+                  <option>待接受邀請</option>
+                  <option>已停用</option>
+                </select>
+                <span class="search-mini" style="margin-left:auto;">
+                  <input type="text" placeholder="搜尋姓名或 Email..." style="padding:5px 10px; border:1px solid var(--border); border-radius:4px; font-size:12px; width:200px;">
+                </span>
+              </div>
+
+              <table class="item-table">
+                <thead>
+                  <tr>
+                    <th style="width:36%;">使用者</th>
+                    <th style="width:18%;">角色</th>
+                    <th style="width:14%;">最後登入</th>
+                    <th style="width:14%;">狀態</th>
+                    <th style="width:18%; text-align:right;">操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div style="display:flex; align-items:center; gap:10px;">
+                        <div class="avatar-lg" style="background:#0F766E;">李</div>
+                        <div>
+                          <div style="font-weight:600; font-size:13px;">李董事長（您）</div>
+                          <div style="font-size:11px; color:var(--text-sub);">admin@hsl.demo</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="badge done" style="background:#EDE9FE; color:#5B21B6;">🏢 機構管理員</span></td>
+                    <td style="font-size:11px; color:var(--text-sub);">剛剛</td>
+                    <td><span class="badge done"><span class="dot"></span>啟用中</span></td>
+                    <td style="text-align:right;">
+                      <button class="btn btn-ghost btn-sm" disabled style="opacity:0.4; cursor:not-allowed;" title="無法停用自己的帳號">⋯</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div style="display:flex; align-items:center; gap:10px;">
+                        <div class="avatar-lg sup">王</div>
+                        <div>
+                          <div style="font-weight:600; font-size:13px;">王俊宏</div>
+                          <div style="font-size:11px; color:var(--text-sub);">supervisor@hsl.demo</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="badge done" style="background:#DBEAFE; color:#1E40AF;">👔 主管</span></td>
+                    <td style="font-size:11px; color:var(--text-sub);">2 小時前</td>
+                    <td><span class="badge done"><span class="dot"></span>啟用中</span></td>
+                    <td style="text-align:right;">
+                      <button class="btn btn-ghost btn-sm" onclick="alert('開啟下拉選單：\n· 編輯資料 (改姓名/角色)\n· 重設密碼 (寄重設信)\n· 重寄邀請信\n· 停用帳號')">⋯</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div style="display:flex; align-items:center; gap:10px;">
+                        <div class="avatar-lg">陳</div>
+                        <div>
+                          <div style="font-weight:600; font-size:13px;">陳怡君</div>
+                          <div style="font-size:11px; color:var(--text-sub);">nurse@hsl.demo</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="badge done" style="background:#DCFCE7; color:#166534;">👩‍⚕️ 護理師</span></td>
+                    <td style="font-size:11px; color:var(--text-sub);">5 分鐘前</td>
+                    <td><span class="badge done"><span class="dot"></span>啟用中</span></td>
+                    <td style="text-align:right;">
+                      <button class="btn btn-ghost btn-sm" onclick="alert('開啟下拉選單：\n· 編輯資料\n· 重設密碼\n· 重寄邀請信\n· 停用帳號')">⋯</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div style="display:flex; align-items:center; gap:10px;">
+                        <div class="avatar-lg" style="background:#94A3B8;">林</div>
+                        <div>
+                          <div style="font-weight:600; font-size:13px;">林佳玲</div>
+                          <div style="font-size:11px; color:var(--text-sub);">lin@hsl.demo</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="badge done" style="background:#DCFCE7; color:#166534;">👩‍⚕️ 護理師</span></td>
+                    <td style="font-size:11px; color:var(--text-mute);">尚未登入</td>
+                    <td><span class="badge revise"><span class="dot"></span>待接受邀請</span></td>
+                    <td style="text-align:right;">
+                      <button class="btn btn-secondary btn-sm" style="font-size:11px; padding:4px 10px;" onclick="alert('已重寄邀請信至 lin@hsl.demo\n邀請信有效期 7 天')">📧 重寄邀請</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div style="padding:12px 18px; background:var(--primary-soft); border-top:1px solid var(--border-light); font-size:12px; color:var(--text-sub); line-height:1.7;">
+                <strong>💡 帳號管理規則：</strong><br>
+                · 所有員工帳號由機構管理員建立並指派角色，新員工需透過邀請信首次設定密碼<br>
+                · 邀請信有效期 7 天，過期可重寄；員工尚未接受時不佔用「啟用中」名額<br>
+                · 員工離職時點「停用帳號」即可立即撤銷所有 session，個資 1 年後自動匿名化<br>
+                · 機構至少需保留 1 位機構管理員（無法停用自己的帳號）
               </div>
             </div>
 
@@ -4584,8 +5238,8 @@
             <div><strong>財團法人台北市私立愛愛院</strong><span class="badge-y" style="background:#0EA5E9; color:#fff;">示範</span></div>
             <div class="meta-y">住宿式 · 台北市 · 115 年度</div>
           </a>
-          <div class="y-sep supervisor-only"></div>
-          <a class="y-item add supervisor-only" onclick="event.stopPropagation(); if(confirm('建立 116 年度評鑑？\n\n· 將 115 年度自動歸檔（保留所有資料）\n· 依新版基準建立 116 年度評鑑項次\n· 所有護理師需重新填寫\n\n確定繼續？')) alert('已建立 116 年度評鑑（系統設定 → 評鑑期間可修改細節）');">+ 建立 116 年度評鑑</a>
+          <div class="y-sep admin-only"></div>
+          <a class="y-item add admin-only" onclick="event.stopPropagation(); if(confirm('建立 116 年度評鑑？\n\n· 將 115 年度自動歸檔（保留所有資料）\n· 依新版基準建立 116 年度評鑑項次\n· 所有護理師需重新填寫\n\n確定繼續？')) alert('已建立 116 年度評鑑（系統設定 → 評鑑期間可修改細節）');">+ 建立 116 年度評鑑</a>
         </div>
       </div>
       <a class="nav-item" onclick="go('dashboard')"><span class="icon">📊</span>評鑑看板</a>
@@ -4593,7 +5247,7 @@
       <a class="nav-item" onclick="go('progress')"><span class="icon">📈</span>進度報表</a>
       <div class="nav-section">系統</div>
       <a class="nav-item" onclick="go('notifications')"><span class="icon">🔔</span>通知中心<span class="badge-inline">3</span></a>
-      <a class="nav-item supervisor-only" onclick="go('settings')"><span class="icon">⚙️</span>系統設定</a>
+      <a class="nav-item admin-only" onclick="go('settings')"><span class="icon">⚙️</span>系統設定</a>
       <a class="nav-item active" onclick="go('profile')"><span class="icon">👤</span>個人設定</a>
     </aside>
 
@@ -4680,15 +5334,40 @@
               <div class="panel-body settings-form">
                 <div class="form-row">
                   <label>目前密碼</label>
-                  <div class="field"><input class="form-input" type="password" placeholder="請輸入目前密碼" style="max-width:300px;"></div>
+                  <div class="field">
+                    <div class="pw-input-wrap" style="max-width:300px;">
+                      <input class="form-input" type="password" id="cur-pw" placeholder="請輸入目前密碼">
+                      <button type="button" class="pw-toggle" onclick="togglePw('cur-pw', this)">👁</button>
+                    </div>
+                  </div>
                 </div>
                 <div class="form-row">
-                  <label>新密碼<small>至少 8 字元，含英數</small></label>
-                  <div class="field"><input class="form-input" type="password" placeholder="請輸入新密碼" style="max-width:300px;"></div>
+                  <label>新密碼<small>至少 8 字元，含英文+數字</small></label>
+                  <div class="field" style="max-width:300px;">
+                    <div class="pw-input-wrap">
+                      <input class="form-input" type="password" id="profile-new-pw" placeholder="請輸入新密碼" oninput="checkPwStrength(this.value)">
+                      <button type="button" class="pw-toggle" onclick="togglePw('profile-new-pw', this)">👁</button>
+                    </div>
+                    <div class="pw-strength">
+                      <div class="pw-strength-bar"><div class="pw-strength-fill" id="pw-bar"></div></div>
+                      <div class="pw-strength-label" id="pw-label">請輸入密碼</div>
+                    </div>
+                    <ul class="pw-checklist">
+                      <li id="chk-len"><span class="ico">○</span>至少 8 個字元</li>
+                      <li id="chk-alpha"><span class="ico">○</span>包含英文字母</li>
+                      <li id="chk-digit"><span class="ico">○</span>包含數字</li>
+                      <li id="chk-not-common"><span class="ico">○</span>非常見弱密碼</li>
+                    </ul>
+                  </div>
                 </div>
                 <div class="form-row">
                   <label>確認新密碼</label>
-                  <div class="field"><input class="form-input" type="password" placeholder="再次輸入新密碼" style="max-width:300px;"></div>
+                  <div class="field">
+                    <div class="pw-input-wrap" style="max-width:300px;">
+                      <input class="form-input" type="password" id="profile-confirm-pw" placeholder="再次輸入新密碼">
+                      <button type="button" class="pw-toggle" onclick="togglePw('profile-confirm-pw', this)">👁</button>
+                    </div>
+                  </div>
                 </div>
                 <div class="form-row">
                   <label>密碼上次變更</label>
@@ -4705,7 +5384,7 @@
               <div class="panel-head"><div class="title">🔔 通知偏好</div></div>
               <div class="panel-body settings-form">
 
-                <p class="supervisor-only" style="font-size:12px; color:var(--text-sub); padding:10px 14px; background:#FFFBEB; border:1px solid #FBBF24; border-radius:var(--r-md); margin-bottom:14px;">
+                <p class="admin-only" style="font-size:12px; color:var(--text-sub); padding:10px 14px; background:#FFFBEB; border:1px solid #FBBF24; border-radius:var(--r-md); margin-bottom:14px;">
                   💡 <strong>Line 推播為加購方案</strong>，目前本機構尚未開通。如需啟用 Line 即時通知，請於「<a href="#" onclick="alert('請於 sidebar 點擊「⚙️ 系統設定 → 加購方案」查看詳情');" style="color:var(--primary-dark); font-weight:600;">系統設定 → 加購方案</a>」中聯絡業務開通。
                 </p>
 
@@ -4714,8 +5393,8 @@
                   <div class="field" style="display:flex; gap:20px; align-items:center;">
                     <label style="display:flex; gap:6px; align-items:center;"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label> 系統內</label>
                     <label style="display:flex; gap:6px; align-items:center;"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label> Email</label>
-                    <label class="feature-locked supervisor-only" style="display:flex; gap:6px; align-items:center;" title="Line Notify 為加購方案"><label class="switch"><input type="checkbox" disabled><span class="slider"></span></label> Line</label>
-                    <span class="feature-lock-badge supervisor-only">🔒 加購方案</span>
+                    <label class="feature-locked admin-only" style="display:flex; gap:6px; align-items:center;" title="Line Notify 為加購方案"><label class="switch"><input type="checkbox" disabled><span class="slider"></span></label> Line</label>
+                    <span class="feature-lock-badge admin-only">🔒 加購方案</span>
                   </div>
                 </div>
                 <div class="form-row">
@@ -4723,8 +5402,8 @@
                   <div class="field" style="display:flex; gap:20px; align-items:center;">
                     <label style="display:flex; gap:6px; align-items:center;"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label> 系統內</label>
                     <label style="display:flex; gap:6px; align-items:center;"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label> Email</label>
-                    <label class="feature-locked supervisor-only" style="display:flex; gap:6px; align-items:center;" title="Line Notify 為加購方案"><label class="switch"><input type="checkbox" disabled><span class="slider"></span></label> Line</label>
-                    <span class="feature-lock-badge supervisor-only">🔒 加購方案</span>
+                    <label class="feature-locked admin-only" style="display:flex; gap:6px; align-items:center;" title="Line Notify 為加購方案"><label class="switch"><input type="checkbox" disabled><span class="slider"></span></label> Line</label>
+                    <span class="feature-lock-badge admin-only">🔒 加購方案</span>
                   </div>
                 </div>
                 <div class="form-row">
@@ -4732,8 +5411,8 @@
                   <div class="field" style="display:flex; gap:20px; align-items:center;">
                     <label style="display:flex; gap:6px; align-items:center;"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label> 系統內</label>
                     <label style="display:flex; gap:6px; align-items:center;"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label> Email</label>
-                    <label class="feature-locked supervisor-only" style="display:flex; gap:6px; align-items:center;" title="Line Notify 為加購方案"><label class="switch"><input type="checkbox" disabled><span class="slider"></span></label> Line</label>
-                    <span class="feature-lock-badge supervisor-only">🔒 加購方案</span>
+                    <label class="feature-locked admin-only" style="display:flex; gap:6px; align-items:center;" title="Line Notify 為加購方案"><label class="switch"><input type="checkbox" disabled><span class="slider"></span></label> Line</label>
+                    <span class="feature-lock-badge admin-only">🔒 加購方案</span>
                   </div>
                 </div>
                 <div class="form-row">
@@ -4791,6 +5470,145 @@
 <!-- ============================================================ -->
 <!-- 全域 PDF 預覽 Modal                                            -->
 <!-- ============================================================ -->
+<!-- ============================================================ -->
+<!-- 新增使用者 Modal                                                -->
+<!-- ============================================================ -->
+<div class="pdf-modal" id="user-invite-modal" onclick="if(event.target.id==='user-invite-modal'){this.classList.remove('open');document.body.style.overflow='';}">
+  <div class="pdf-modal-content" style="max-width:560px;">
+    <div class="pdf-modal-header">
+      <h3>👥 新增使用者 <span style="font-weight:400; font-size:12px; opacity:0.7; margin-left:6px;">系統將自動寄發邀請信</span></h3>
+      <div class="actions">
+        <button class="close-x" onclick="document.getElementById('user-invite-modal').classList.remove('open'); document.body.style.overflow='';" title="關閉">✕</button>
+      </div>
+    </div>
+    <div class="pdf-modal-body" style="background:white; padding:24px; max-height:none;">
+      <div class="settings-form">
+        <div class="form-row">
+          <label>姓名 <span style="color:var(--danger);">*</span></label>
+          <div class="field"><input class="form-input" placeholder="例：王小明" style="max-width:100%;"></div>
+        </div>
+        <div class="form-row">
+          <label>Email <span style="color:var(--danger);">*</span><small>邀請信將寄至此信箱</small></label>
+          <div class="field"><input class="form-input" type="email" placeholder="例：wang@hsl.demo" style="max-width:100%;"></div>
+        </div>
+        <div class="form-row">
+          <label>角色 <span style="color:var(--danger);">*</span></label>
+          <div class="field">
+            <div class="grade-options" style="gap:8px; flex-direction:column;">
+              <label style="padding:10px 14px; cursor:pointer;">
+                <input type="radio" name="new-user-role" value="NURSE" checked>
+                <span style="margin-left:6px;">👩‍⚕️ <strong>護理師</strong></span>
+                <small style="display:block; margin-top:4px; color:var(--text-sub); margin-left:24px;">撰寫項次內容、上傳附件。無審核權</small>
+              </label>
+              <label style="padding:10px 14px; cursor:pointer;">
+                <input type="radio" name="new-user-role" value="SUPERVISOR">
+                <span style="margin-left:6px;">👔 <strong>主管 / 護理師主管</strong></span>
+                <small style="display:block; margin-top:4px; color:var(--text-sub); margin-left:24px;">繼承護理師權限，多了審核（通過/退回）</small>
+              </label>
+              <label style="padding:10px 14px; cursor:pointer;">
+                <input type="radio" name="new-user-role" value="INST_ADMIN">
+                <span style="margin-left:6px;">🏢 <strong>機構管理員</strong></span>
+                <small style="display:block; margin-top:4px; color:var(--text-sub); margin-left:24px;">最高權限。可管理帳號、加購方案、機構設定</small>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <label>員工編號<small>選填</small></label>
+          <div class="field"><input class="form-input" placeholder="例：N0042" style="max-width:200px;"></div>
+        </div>
+        <div class="form-row">
+          <label>聯絡電話<small>選填</small></label>
+          <div class="field"><input class="form-input" placeholder="例：0912-xxx-xxx" style="max-width:200px;"></div>
+        </div>
+
+        <div style="background:var(--primary-soft); border:1px solid var(--primary-light); border-radius:var(--r-md); padding:12px 14px; margin-top:14px; font-size:12px; color:var(--text); line-height:1.7;">
+          <strong>📧 系統將執行：</strong><br>
+          1. 建立此使用者帳號（狀態：「待接受邀請」）<br>
+          2. 寄送邀請信至上方 Email（含 7 天有效的設定密碼連結）<br>
+          3. 員工點連結 → 設定密碼 → 自動登入<br>
+          4. 員工首次登入後，狀態自動變更為「啟用中」
+        </div>
+      </div>
+    </div>
+    <div class="pdf-modal-footer" style="display:flex; justify-content:flex-end; gap:8px;">
+      <button class="btn btn-ghost" onclick="document.getElementById('user-invite-modal').classList.remove('open'); document.body.style.overflow='';">取消</button>
+      <button class="btn btn-primary" onclick="alert('使用者已新增，邀請信已寄出至 wang@hsl.demo'); document.getElementById('user-invite-modal').classList.remove('open'); document.body.style.overflow='';">建立帳號並寄送邀請信</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 附件上傳 Modal（要求填寫內容說明）                              -->
+<!-- ============================================================ -->
+<div class="pdf-modal" id="attach-upload-modal" onclick="if(event.target.id==='attach-upload-modal')closeAttachUploadModal()">
+  <div class="pdf-modal-content" style="max-width:620px;">
+    <div class="pdf-modal-header">
+      <h3>📎 上傳佐證附件 <span class="badge" style="background:var(--primary);">步驟 2 / 2</span></h3>
+      <button class="close-x" onclick="closeAttachUploadModal()" title="關閉">✕</button>
+    </div>
+    <div class="pdf-modal-body" style="background:white; padding:24px; max-height:none;">
+
+      <!-- 已選檔案預覽 -->
+      <div style="display:flex; gap:14px; padding:14px; background:#F0FDFA; border:1px solid var(--primary); border-radius:8px; margin-bottom:18px;">
+        <div style="width:80px; height:80px; background:linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%); color:#B91C1C; border-radius:6px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:24px;">PDF</div>
+        <div style="flex:1;">
+          <div style="font-weight:600; margin-bottom:4px;">已選擇檔案</div>
+          <div style="font-size:13px; color:var(--text-sub); font-family:monospace; background:white; padding:6px 10px; border-radius:4px; border:1px solid var(--border-light);">114年度業務計畫_FINAL_v3.pdf</div>
+          <small style="display:block; margin-top:6px; color:var(--text-mute);">1.8 MB · 23 頁 · PDF</small>
+        </div>
+      </div>
+
+      <!-- 內容說明欄位（必填）-->
+      <div class="form-group">
+        <label style="font-weight:600; display:flex; align-items:center; gap:6px;">
+          內容說明
+          <span style="color:#DC2626; font-size:14px;">*</span>
+          <small style="color:var(--text-sub); font-weight:400; margin-left:auto;">必填 · 將顯示為評鑑 PDF 中此附件縮圖的標題</small>
+        </label>
+        <input type="text" class="form-input" id="attach-desc-input"
+               placeholder="例：114 年度業務計畫書（含願景、目標、執行策略與績效指標）"
+               style="font-size:14px;"
+               maxlength="80"
+               oninput="document.getElementById('attach-desc-count').textContent = this.value.length + ' / 80';">
+        <small style="display:block; margin-top:6px; color:var(--text-sub); display:flex; justify-content:space-between;">
+          <span>💡 建議以「文件主體 + 重點摘要」描述，避免空泛詞如「附件1」或原始檔名</span>
+          <span id="attach-desc-count">0 / 80</span>
+        </small>
+      </div>
+
+      <!-- PDF 呈現示意 -->
+      <div style="margin-top:20px; padding:14px; background:#F8FAFC; border:1px dashed #94A3B8; border-radius:8px;">
+        <small style="display:block; color:var(--text-sub); margin-bottom:8px; font-weight:600;">📄 PDF 中將呈現如下：</small>
+        <table style="width:100%; border-collapse:collapse; font-size:11px;">
+          <thead>
+            <tr>
+              <th style="background:#E0F2FE; color:#075985; padding:6px 10px; border:1px solid #1F2937; font-weight:700;" id="attach-preview-th">（請輸入內容說明，將顯示於此）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="background:#FAFAFA; padding:10px; border:1px solid #1F2937; text-align:center; height:110px;">
+                <div style="display:inline-block; width:200px; height:90px; background:linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%); color:#B91C1C; border:1px solid #CBD5E1; border-radius:4px; font-weight:700; font-size:24px; line-height:90px;">PDF</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+    <div class="pdf-modal-footer" style="display:flex; justify-content:flex-end; gap:8px;">
+      <button class="btn btn-ghost" onclick="closeAttachUploadModal()">取消</button>
+      <button class="btn btn-primary" onclick="
+        var v = document.getElementById('attach-desc-input').value.trim();
+        if (!v) { alert('請填寫內容說明（為必填欄位）'); return; }
+        alert('附件已上傳，內容說明：「' + v + '」');
+        closeAttachUploadModal();
+      ">確認上傳</button>
+    </div>
+  </div>
+</div>
+
 <div class="pdf-modal" id="pdf-modal" onclick="if(event.target.id==='pdf-modal')closePdfModal()">
   <div class="pdf-modal-content">
     <div class="pdf-modal-header">
@@ -5021,6 +5839,53 @@
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
+  // ========== 密碼強度檢查（reset-password 頁用） ==========
+  const COMMON_WEAK_PWS = ['12345678','password','qwerty123','abc12345','11111111','iloveyou'];
+  function checkPwStrength(val) {
+    const hasLen = val.length >= 8;
+    const hasAlpha = /[a-zA-Z]/.test(val);
+    const hasDigit = /[0-9]/.test(val);
+    const hasSpecial = /[^a-zA-Z0-9]/.test(val);
+    const isCommon = COMMON_WEAK_PWS.includes(val.toLowerCase());
+
+    // 更新清單
+    document.getElementById('chk-len').classList.toggle('ok', hasLen);
+    document.getElementById('chk-alpha').classList.toggle('ok', hasAlpha);
+    document.getElementById('chk-digit').classList.toggle('ok', hasDigit);
+    document.getElementById('chk-not-common').classList.toggle('ok', val.length > 0 && !isCommon);
+
+    // 計算強度
+    const bar = document.getElementById('pw-bar');
+    const lvl = document.getElementById('pw-level');
+    bar.className = 'pw-strength-bar';
+    lvl.className = 'level';
+
+    if (val.length === 0) {
+      lvl.textContent = '尚未輸入';
+    } else if (!hasLen || isCommon) {
+      bar.classList.add('weak');
+      lvl.textContent = '弱';
+      lvl.classList.add('weak');
+    } else if (hasLen && hasAlpha && hasDigit && hasSpecial && val.length >= 10) {
+      bar.classList.add('strong');
+      lvl.textContent = '強';
+      lvl.classList.add('strong');
+    } else if (hasLen && hasAlpha && hasDigit) {
+      bar.classList.add('medium');
+      lvl.textContent = '中';
+      lvl.classList.add('medium');
+    } else {
+      bar.classList.add('weak');
+      lvl.textContent = '弱';
+      lvl.classList.add('weak');
+    }
+  }
+  function togglePw(id, btn) {
+    const input = document.getElementById(id);
+    if (input.type === 'password') { input.type = 'text'; btn.textContent = '🙈'; }
+    else { input.type = 'password'; btn.textContent = '👁'; }
+  }
+
   // 角色切換（三層權限：護理師 / 主管 / 機構管理員）
   // 規則：
   //   nurse-only      = 只給護理師看
@@ -5105,11 +5970,40 @@
     window.print();
   }
 
+  // ========== 附件上傳 Modal ==========
+  function openAttachUploadModal() {
+    const modal = document.getElementById('attach-upload-modal');
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    // 重置欄位
+    const input = document.getElementById('attach-desc-input');
+    if (input) {
+      input.value = '';
+      document.getElementById('attach-desc-count').textContent = '0 / 80';
+      document.getElementById('attach-preview-th').textContent = '（請輸入內容說明，將顯示於此）';
+      // 即時同步預覽
+      input.oninput = function() {
+        document.getElementById('attach-desc-count').textContent = this.value.length + ' / 80';
+        const th = document.getElementById('attach-preview-th');
+        th.textContent = this.value.trim() || '（請輸入內容說明，將顯示於此）';
+      };
+      setTimeout(() => input.focus(), 100);
+    }
+  }
+
+  function closeAttachUploadModal() {
+    const modal = document.getElementById('attach-upload-modal');
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
   // Esc 關閉 modal
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      const modal = document.getElementById('pdf-modal');
-      if (modal && modal.classList.contains('open')) closePdfModal();
+      const pdfModal = document.getElementById('pdf-modal');
+      if (pdfModal && pdfModal.classList.contains('open')) closePdfModal();
+      const attachModal = document.getElementById('attach-upload-modal');
+      if (attachModal && attachModal.classList.contains('open')) closeAttachUploadModal();
     }
   });
 
